@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProfiles } from "./redux/slice/fetchAllProfilesReducers";
 import AllProfiles from "./components/AllProfiles";
+import NavBar from "./components/NavBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavBar />
         <Container>
           <Routes>
             <Route path="/profile" element={<AllProfiles />} />
