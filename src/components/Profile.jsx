@@ -3,9 +3,10 @@ import { Col, Row } from "react-bootstrap";
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchProfile } from "../redux/slice/fetchProfileReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Profile() {
+  const profile = useSelector((state) => state.fetchProfile.data);
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
@@ -44,7 +45,7 @@ function Profile() {
                 backgroundColor: "red",
               }}
             />
-            <Card.Title className="mt-5 fs-2">Salvatore Alessandro D'Amico</Card.Title>
+            <Card.Title className="mt-5 fs-2">{profile && profile.name + " " + profile.surname}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Junior Front-end Developer</Card.Subtitle>
             <Card.Text>Oria, Puglia, Italia</Card.Text>
             <ListGroup className="list-group-flush">
