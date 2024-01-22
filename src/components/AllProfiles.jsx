@@ -11,8 +11,8 @@ const AllProfiles = () => {
 				profiles.map((profile) => (
 					<Col className="my-2">
 						<Card className="h-100 shadow">
-							<CardBody className="d-flex flex-column align-items-center">
-								<div className="d-flex align-items-start mb-2 pt-2 pb-3">
+							<CardBody className="d-flex flex-column">
+								<div className="d-flex align-items-start mb-auto pt-2 pb-3">
 									<div>
 										<img
 											src={profile && profile.image}
@@ -22,14 +22,14 @@ const AllProfiles = () => {
 										/>
 									</div>
 									<div className="ms-1">
-										<div className="truncate">
+										<div>
 											{profile && profile.name} {"  "}
 											{profile && profile.surname}
 										</div>
 										<div className="text-muted">{profile && profile.title}</div>
 									</div>
 								</div>
-								<div>
+								<div className="d-flex align-items-center mx-auto">
 									<NavLink
 										to="/messages"
 										className="btn btn-outline-secondary rounded-pill ps-2 pe-3 mt-3 pb-2 py-1 text-center"
