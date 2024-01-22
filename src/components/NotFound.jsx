@@ -3,14 +3,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const NotFound = (props) => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	console.log(navigate);
+	// console.log(navigate);
 
-	useEffect(() => {
-		navigate("/");
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	navigate("/");
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	return (
 		<>

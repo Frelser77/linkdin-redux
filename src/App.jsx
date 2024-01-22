@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import NotFound from "./components/NotFound";
 import { Container } from "react-bootstrap";
-import Profile from "./components/Profile";
+import Profile from "./components/ProfileSide";
 
 function App() {
 	return (
@@ -14,7 +14,7 @@ function App() {
 					<Routes>
 						<Route path="/profile/me" element={<Profile />} />
 						<Route path="/profile/:userId" element={<Profile />} />
-						<Route path="/notFound" element={<NotFound />} />
+						{/* <Route path="*" element={<NotFound />} /> */}
 					</Routes>
 				</Container>
 			</BrowserRouter>
