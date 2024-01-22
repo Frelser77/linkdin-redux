@@ -11,6 +11,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
 import { Linkedin } from "react-bootstrap-icons";
 import {
+  editProfile,
   setArea,
   setBio,
   setEmail,
@@ -30,11 +31,19 @@ function Profile() {
   const [show, setShow] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
 
+  const [dataToEdit, setDataToEdit] = useState({ ...profile });
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleCloseSecond = () => setShowSecond(false);
   const handleShowSecond = () => setShowSecond(true);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    dispatch(editProfile(dataToEdit));
+  };
 
   useEffect(() => {
     let queryParam;
@@ -314,14 +323,14 @@ function Profile() {
           <Modal.Title>Modifica di presentazione</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="mx-2">
+          <Form className="mx-2" onSubmit={() => handleSubmit()}>
             <Form.Group className="mb-3" controlId="editForm.ControlInput1">
               <Form.Label className="fw-semibold w-100">
                 Nome
                 <FormControl
-                  value={profile.name}
+                  value={dataToEdit.name}
                   placeholder="Inserisci il tuo nome"
-                  onChange={(e) => dispatch(setName(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, name: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -329,9 +338,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Cognome
                 <FormControl
-                  value={profile.surname}
+                  value={dataToEdit.surname}
                   placeholder="Inserisci il tuo cognome"
-                  onChange={(e) => dispatch(setSurname(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, surname: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -339,9 +348,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Email
                 <FormControl
-                  value={profile.email}
+                  value={dataToEdit.email}
                   placeholder="mariorossi@gmail.com"
-                  onChange={(e) => dispatch(setEmail(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, email: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -349,9 +358,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Username
                 <FormControl
-                  value={profile.username}
+                  value={dataToEdit.username}
                   placeholder="mario_rossi"
-                  onChange={(e) => dispatch(setUsername(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, usernam: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -359,9 +368,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Titolo
                 <FormControl
-                  value={profile.title}
+                  value={dataToEdit.title}
                   placeholder="Attore"
-                  onChange={(e) => dispatch(setTitle(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, title: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -369,9 +378,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Bio
                 <FormControl
-                  value={profile.bio}
+                  value={dataToEdit.bio}
                   placeholder="Biografia"
-                  onChange={(e) => dispatch(setBio(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, bio: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -379,9 +388,9 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Località
                 <FormControl
-                  value={profile.area}
+                  value={dataToEdit.area}
                   placeholder="Località"
-                  onChange={(e) => dispatch(setArea(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, area: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
@@ -389,12 +398,15 @@ function Profile() {
               <Form.Label className="fw-semibold w-100">
                 Immagine
                 <FormControl
-                  value={profile.image}
+                  value={dataToEdit.image}
                   placeholder="Immagine"
-                  onChange={(e) => dispatch(setImage(e.target.value))}
+                  onChange={(e) => setDataToEdit({ ...dataToEdit, image: e.target.value })}
                 />
               </Form.Label>
             </Form.Group>
+            <div className="d-flex justify-content-end">
+              <Button type="submit">Save</Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>
