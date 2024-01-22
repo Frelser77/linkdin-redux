@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { CardText, Col, Row } from "react-bootstrap";
+import { CardHeader, CardText, Col, Row } from "react-bootstrap";
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
-import { Link, NavLink, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { fetchProfile } from "../redux/slice/fetchProfileReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { PiPaperPlaneTiltDuotone } from "react-icons/pi";
+import ProfileCard from "./ProfileCard";
 function Profile() {
 	const profile = useSelector((state) => state.fetchProfile.data);
 	const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function Profile() {
 	}, [dispatch, location.pathname, params.userId]);
 
 	return (
-		<Row>
+		<Row className="my-4">
 			<Col>
 				<Card className="mb-2">
 					<Card.Header className="bg-primary text-white" style={{ height: "200px" }}></Card.Header>
@@ -168,7 +169,7 @@ function Profile() {
 			</Col>
 			{/* SIDE BAR */}
 			<Col md={3} className="d-none d-md-block">
-				<Card>
+				<Card className="mb-2">
 					<Card.Body>
 						<Card.Title>Lingua del profilo</Card.Title>
 						<Card.Text>Italiano</Card.Text>
@@ -177,131 +178,13 @@ function Profile() {
 						<Card.Link href="https://www.linkedin.com/in/salvatore-alessandro-d-amico-4a1551267"></Card.Link>
 					</Card.Body>
 				</Card>
-				<Card className="mb-2">
+
+				<Card className="">
 					<Card.Body>
 						<Card.Title>Altri profili consultati</Card.Title>
-						<ListGroup variant="flush">
-							{/* UTENDI SIDE */}
-							<ListGroup.Item>
-								<Row>
-									<Col xs={3}>
-										<img
-											src={profile && profile.image}
-											className="rounded-circle"
-											style={{ width: "48px", height: "48px" }}
-											alt="Profile"
-										/>
-									</Col>
-									<Col className="ms-1">
-										<div>
-											{profile && profile.name} {"  "}
-											{profile && profile.surname}
-										</div>
-										<div className="text-muted">{profile && profile.title}</div>
-										<NavLink to="/messages" className="btn btn-outline-secondary p-0 my-1">
-											<PiPaperPlaneTiltDuotone className="mx-1" />
-											Messaggio
-										</NavLink>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-							{/* UTENDI SIDE */}
-							<ListGroup.Item>
-								<Row>
-									<Col xs={3}>
-										<img
-											src={profile && profile.image}
-											className="rounded-circle mt-2"
-											style={{ width: "48px", height: "48px" }}
-											alt="Profile"
-										/>
-									</Col>
-									<Col className="ms-1">
-										<div>
-											{profile && profile.name} {"  "}
-											{profile && profile.surname}
-										</div>
-										<div className="text-muted">{profile && profile.title}</div>
-										<NavLink to="/messages" className="btn btn-outline-secondary p-0 my-1">
-											<PiPaperPlaneTiltDuotone className="mx-1" />
-											Messaggio
-										</NavLink>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-							{/* UTENDI SIDE */}
-							<ListGroup.Item>
-								<Row>
-									<Col xs={3}>
-										<img
-											src={profile && profile.image}
-											className="rounded-circle mt-2"
-											style={{ width: "48px", height: "48px" }}
-											alt="Profile"
-										/>
-									</Col>
-									<Col className="ms-1">
-										<div>
-											{profile && profile.name} {"  "}
-											{profile && profile.surname}
-										</div>
-										<div className="text-muted">{profile && profile.title}</div>
-										<NavLink to="/messages" className="btn btn-outline-secondary p-0 my-1">
-											<PiPaperPlaneTiltDuotone className="mx-1" />
-											Messaggio
-										</NavLink>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-							{/* UTENDI SIDE */}
-							<ListGroup.Item>
-								<Row>
-									<Col xs={3}>
-										<img
-											src={profile && profile.image}
-											className="rounded-circle mt-2"
-											style={{ width: "48px", height: "48px" }}
-											alt="Profile"
-										/>
-									</Col>
-									<Col className="ms-1">
-										<div>
-											{profile && profile.name} {"  "}
-											{profile && profile.surname}
-										</div>
-										<div className="text-muted">{profile && profile.title}</div>
-										<NavLink to="/messages" className="btn btn-outline-secondary p-0 my-1">
-											<PiPaperPlaneTiltDuotone className="mx-1" />
-											Messaggio
-										</NavLink>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-							{/* UTENDI SIDE */}
-							<ListGroup.Item>
-								<Row>
-									<Col xs={3}>
-										<img
-											src={profile && profile.image}
-											className="rounded-circle mt-2"
-											style={{ width: "48px", height: "48px" }}
-											alt="Profile"
-										/>
-									</Col>
-									<Col className="ms-1">
-										<div>
-											{profile && profile.name} {"  "}
-											{profile && profile.surname}
-										</div>
-										<div className="text-muted">{profile && profile.title}</div>
-										<NavLink to="/messages" className="btn btn-outline-secondary p-0 my-1">
-											<PiPaperPlaneTiltDuotone className="mx-1" />
-											Messaggio
-										</NavLink>
-									</Col>
-								</Row>
-							</ListGroup.Item>
-						</ListGroup>
+						{/* UTENDI SIDE */}
+
+						<ProfileCard profile={profile} />
 					</Card.Body>
 				</Card>
 			</Col>
