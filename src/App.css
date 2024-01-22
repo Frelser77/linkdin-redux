@@ -1,3 +1,9 @@
-.App {
-	text-align: center;
+.undecorated {
+  text-decoration: none;
+  color: gray;
+}
+
+.undecorated:hover {
+  text-decoration: underline;
+  color: unset;
 }
