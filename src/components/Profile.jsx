@@ -4,6 +4,7 @@ import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link, useLocation, useParams } from "react-router-dom";
 import fetchProfileReducer, { fetchProfile } from "../redux/slice/fetchProfileReducer";
 import { useDispatch } from "react-redux";
+import { setQuery } from "../redux/slice/queryParamReducer";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -13,13 +14,15 @@ function Profile() {
   const location = useLocation();
   if (location.pathname === "/profile/me") {
     queryParam = "me";
+    dispatch(setQuery(queryParam));
   } else {
     queryParam = params.userId;
+    dispatch(setQuery(queryParam));
   }
 
   useEffect(() => {
-    dispatch(fetchProfileReducer());
-  }, []);
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   return (
     <Row>

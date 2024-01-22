@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { token } from "../../token";
+import { useSelector } from "react-redux";
 
 const initialState = {
   data: null,
@@ -8,8 +9,9 @@ const initialState = {
 };
 
 export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (_, { rejectWithValue }) => {
+  const queryParam = useSelector((state) => state.queryParam.query);
   try {
-    const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${queryParam}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -30,13 +32,14 @@ export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (_, {
 const fetchProfileSlice = createSlice({
   name: "fetchProfile",
   initialState,
-  extraReducers: {
+  builder: {
     [fetchProfile.pending]: (state, action) => {
       state.status = "loading";
     },
     [fetchProfile.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.data = action.payload;
+      console.log(state.data);
     },
     [fetchProfile.rejected]: (state, action) => {
       state.status = "failed";
