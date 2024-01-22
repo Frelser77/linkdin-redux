@@ -12,7 +12,7 @@ const AllProfiles = () => {
       <Row xs={2} sm={3} md={4} className="my-3">
         {profiles &&
           profiles.map((profile) => (
-            <Col className="my-2">
+            <Col key={"profile" + profile._id} className="my-2">
               <Card className="h-100 shadow">
                 <CardBody className="d-flex flex-column">
                   <div className="d-flex align-items-start mb-auto pt-2 pb-3">

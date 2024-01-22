@@ -1,31 +1,42 @@
 body {
-	background-color: #f4f2ee;
+  background-color: #f4f2ee;
 }
 
 .btn-outline-secondary {
-	transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 .btn-outline-secondary:hover {
-	background-color: #0a66c2;
-	color: white;
+  background-color: #0a66c2;
+  color: white;
 }
 
 .undecorated {
-	text-decoration: none;
-	color: gray;
+  text-decoration: none;
+  color: gray;
 }
 
 .undecorated:hover {
-	text-decoration: underline;
-	color: unset;
+  text-decoration: underline;
+  color: unset;
 }
 
 .modal-dialog {
-	max-width: 600px;
+  max-width: 600px;
 }
 
 .sub-navbar {
-	position: sticky;
-	top: 20px;
-	transition: transform 0.3s ease-in-out;
+  position: sticky;
+  top: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pencil {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: rgb(69, 69, 69);
+  cursor: pointer;
+}
+.pencil:hover {
+  background-color: rgba(193, 193, 193, 0.712);
 }
