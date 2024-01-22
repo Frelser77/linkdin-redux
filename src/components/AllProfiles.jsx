@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux";
 import { Card, CardBody, Col, Row } from "react-bootstrap";
 import { HiUserPlus } from "react-icons/hi2";
-import { useNavigate } from "react-router";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const AllProfiles = () => {
   const profiles = useSelector((state) => state.fetchAllProfiles.data);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -18,16 +16,16 @@ const AllProfiles = () => {
               <Card className="h-100 shadow">
                 <CardBody className="d-flex flex-column">
                   <div className="d-flex align-items-start mb-auto pt-2 pb-3">
-                    <div>
+                    <NavLink to={`/profile/${profile._id}`}>
                       <img
                         src={profile && profile.image}
                         className="rounded-circle me-2"
                         style={{ width: "48px", height: "48px" }}
                         alt="Profile"
                       />
-                    </div>
+                    </NavLink>
                     <div className="ms-1">
-                      <NavLink to={`/profile/${profile._id}`}>
+                      <NavLink to={`/profile/${profile._id}`} className="undecorated">
                         {profile && profile.name} {"  "}
                         {profile && profile.surname}
                       </NavLink>
