@@ -1,9 +1,17 @@
+.btn-outline-secondary {
+	transition: background 0.3s ease-in-out;
+}
+.btn-outline-secondary:hover {
+	background-color: #0a66c2;
+	color: white;
+}
+
 .undecorated {
-  text-decoration: none;
-  color: gray;
+	text-decoration: none;
+	color: gray;
 }
 
 .undecorated:hover {
-  text-decoration: underline;
-  color: unset;
+	text-decoration: underline;
+	color: unset;
 }
