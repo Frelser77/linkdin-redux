@@ -172,10 +172,27 @@ function Profile() {
 						<Card.Text className="mt-3 mb-4 text-muted">{profile && profile.bio}</Card.Text>
 						<Card.Text className="d-flex py-1 border rounded-2">
 							<Row className="p-1">
-								<Col xs={2}></Col>
+								<Col xs={2} className="d-flex justify-content-start">
+									<div>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											aria-hidden="true"
+											role="none"
+											data-supported-dps="24x24"
+											fill="currentColor"
+											class="mercado-match"
+											width="24"
+											height="24"
+											focusable="false"
+										>
+											<path d="M18.36 3H5.64L2 9.5 12 22 22 9.5 18.36 3zm-10.7 7l2.45 6.43L4.96 10h2.7zm1.07 0h6.54L12 18.59 8.73 10zm7.61 0h2.7l-5.15 6.43L16.34 10zm3.09-1h-3.07L14.9 5h2.3l2.24 4zm-5.6-4l1.46 4H8.71l1.46-4h3.66zM6.81 5h2.3L7.65 9H4.58l2.24-4z"></path>
+										</svg>
+									</div>
+								</Col>
 								<Col xs={10}>
-									<CardText className="mb-0 text-muted">Competenze principali</CardText>
-									<CardText className="mb-0 text-muted">{profile && profile.title}</CardText>
+									<p className="mb-0 text-muted">Competenze principali</p>
+									<span className="mb-0 text-muted">{profile && profile.title}</span>
 								</Col>
 							</Row>
 						</Card.Text>
