@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import fetchProfileReducer from "../slice/fetchProfileReducer";
-import queryParamReducer from "../slice/queryParamReducer";
 
 const persistConfig = {
   key: "root",
@@ -11,7 +10,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   fetchProfile: fetchProfileReducer,
-  queryParam: queryParamReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

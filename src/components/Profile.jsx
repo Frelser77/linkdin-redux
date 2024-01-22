@@ -2,27 +2,25 @@ import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link, useLocation, useParams } from "react-router-dom";
-import fetchProfileReducer, { fetchProfile } from "../redux/slice/fetchProfileReducer";
+import { fetchProfile } from "../redux/slice/fetchProfileReducer";
 import { useDispatch } from "react-redux";
-import { setQuery } from "../redux/slice/queryParamReducer";
 
 function Profile() {
   const dispatch = useDispatch();
   const params = useParams();
-
-  let queryParam;
   const location = useLocation();
-  if (location.pathname === "/profile/me") {
-    queryParam = "me";
-    dispatch(setQuery(queryParam));
-  } else {
-    queryParam = params.userId;
-    dispatch(setQuery(queryParam));
-  }
 
   useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
+    let queryParam;
+    if (location.pathname === "/profile/me") {
+      queryParam = "me";
+    } else {
+      queryParam = params.userId;
+    }
+
+    // Pass the queryParam as an argument to fetchProfile
+    dispatch(fetchProfile(queryParam));
+  }, [dispatch, location.pathname, params.userId]);
 
   return (
     <Row>
@@ -65,7 +63,7 @@ function Profile() {
                 viewBox="0 0 16 16"
                 data-supported-dps="16x16"
                 fill="currentColor"
-                class="mercado-match __web-inspector-hide-shortcut__"
+                className="mercado-match __web-inspector-hide-shortcut__"
                 width="16"
                 height="16"
                 focusable="false"
@@ -81,7 +79,7 @@ function Profile() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -96,7 +94,7 @@ function Profile() {
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="24"
                   height="24"
                   focusable="false"
@@ -117,7 +115,7 @@ function Profile() {
                 viewBox="0 0 16 16"
                 data-supported-dps="16x16"
                 fill="currentColor"
-                class="mercado-match __web-inspector-hide-shortcut__"
+                className="mercado-match __web-inspector-hide-shortcut__"
                 width="16"
                 height="16"
                 focusable="false"
@@ -132,7 +130,7 @@ function Profile() {
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                class="mercado-match"
+                className="mercado-match"
                 width="24"
                 height="24"
                 focusable="false"
@@ -153,7 +151,7 @@ function Profile() {
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                class="mercado-match"
+                className="mercado-match"
                 width="24"
                 height="24"
                 focusable="false"

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { token } from "../../token";
-import { useSelector } from "react-redux";
 
 const initialState = {
   data: null,
@@ -8,8 +7,7 @@ const initialState = {
   error: "",
 };
 
-export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (_, { rejectWithValue }) => {
-  const queryParam = useSelector((state) => state.queryParam.query);
+export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (queryParam, { rejectWithValue }) => {
   try {
     const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${queryParam}`, {
       method: "GET",
@@ -32,20 +30,21 @@ export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (_, {
 const fetchProfileSlice = createSlice({
   name: "fetchProfile",
   initialState,
-  builder: {
-    [fetchProfile.pending]: (state, action) => {
-      state.status = "loading";
-    },
-    [fetchProfile.fulfilled]: (state, action) => {
-      state.status = "succeeded";
-      state.data = action.payload;
-      console.log(state.data);
-    },
-    [fetchProfile.rejected]: (state, action) => {
-      state.status = "failed";
-      state.error = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProfile.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchProfile.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(fetchProfile.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      });
   },
 });
-export const {} = fetchProfileSlice.actions; // esporta qualsiasi azione sincrona
+export const selectProfileData = (state) => state.fetchProfile.data;
 export default fetchProfileSlice.reducer;
