@@ -28,7 +28,7 @@ function Experiences() {
 			<Row xs={2}>
 				{experiences.length > 0 ? (
 					experiences.map((exp) => (
-						<Col className="my-2 offset-3">
+						<Col className="my-2">
 							<Card key={exp._id} className="mb-3 h-100 shadow">
 								<Card.Header as="h5">{exp.role}</Card.Header>
 								<CardBody variant="flush">
@@ -47,7 +47,7 @@ function Experiences() {
 									</Card.Text>
 									{exp.image && (
 										<Card.Text>
-											<Card.Img variant="top" src={exp.image} style={{ maxWidth: "600px", maxHeight: "300px" }} />
+											<Card.Img variant="top" src={exp.image} style={{ width: "500px", height: "300px" }} />
 										</Card.Text>
 									)}
 								</CardBody>
@@ -55,15 +55,17 @@ function Experiences() {
 						</Col>
 					))
 				) : (
-					<Col>
-						<Card>
+					<Col className="offset-3">
+						<Card className="shadow">
 							<Card.Body>
 								<Placeholder as={Card.Title} animation="glow">
+									<Card.Title className="fs-4 text-muted">Non hai aggiunto esperienze</Card.Title>
 									<Placeholder xs={6} />
 								</Placeholder>
 								<Placeholder as={Card.Text} animation="glow">
 									<Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
 									<Placeholder xs={8} />
+									<Placeholder className="my-2" style={{ width: "500px", height: "250px" }}></Placeholder>
 								</Placeholder>
 							</Card.Body>
 						</Card>
