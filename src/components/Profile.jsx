@@ -11,13 +11,12 @@ import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
 import { ArrowRight, Linkedin } from "react-bootstrap-icons";
 import { editProfile, setEditProfile } from "../redux/slice/editProfileReducer";
-import { MySvg } from "./iconCircle";
 import { useNavigate } from "react-router-dom";
-import ExpModal from "./expModal";
 import EditModal from "./EditModal";
 import FileUploadComponent from "./FileUploadComponent";
 import { fetchExperiences, selectAllExperiencesData } from "../redux/slice/ExperienceSlice";
 import { formatDate } from "./Experiences";
+import ExpModal from "./ExpModal";
 
 function Profile() {
   const profile = useSelector((state) => state.fetchProfile.data);
@@ -37,7 +36,7 @@ function Profile() {
     "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
   const navigate = useNavigate();
 
-  const experiences = useSelector(selectAllExperiencesData);
+  const experiences = useSelector((state) => state.fetchExperiences.items);
 
   const renderSectionContent = () => {
     switch (activeSection) {
@@ -388,7 +387,7 @@ function Profile() {
                       <strong>{exp.company}</strong> · {formatDate(exp.startDate)} / {formatDate(exp.endDate)}
                     </div>
                     <small className="m-0">{exp.area}</small>
-                    <Card.Text className="mb-3">Competenze: {exp.description}</Card.Text>
+                    <Card.Text className="mb-3">Descrizione: {exp.description}</Card.Text>
                   </ListGroup.Item>
                 ))
               ) : (
@@ -535,7 +534,15 @@ function Profile() {
       />
 
       {/* MODALE EXPERIENCE */}
-      <ExpModal showAlert={showAlert} showExp={showExp} handleCloseExp={handleCloseExp} statusPut={statusPut} />
+      {profile && (
+        <ExpModal
+          showAlert={showAlert}
+          showExp={showExp}
+          handleCloseExp={handleCloseExp}
+          statusPut={statusPut}
+          userId={profile._id}
+        />
+      )}
 
       {/* MODALE PER L'UPLOAD DELL'IMMAGINE DI PROFILO */}
       {profile && (

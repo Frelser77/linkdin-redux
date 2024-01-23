@@ -10,7 +10,7 @@ export const formatDate = (dateString) => {
 };
 
 function Experiences() {
-  const experiences = useSelector(selectAllExperiencesData);
+  const experiences = useSelector((state) => state.fetchExperiences.items);
   const dispatch = useDispatch();
   const location = useLocation();
   const params = useParams();
