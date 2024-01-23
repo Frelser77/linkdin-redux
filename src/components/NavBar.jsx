@@ -21,11 +21,7 @@ function NavBar() {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [showSubNavbar, setShowSubNavbar] = useState(false);
   const location = useLocation();
-  const profile = useSelector((state) => state.fetchProfile.data);
-
-  const changeSelectedIcon = (icon) => {
-    setSelectedIcon(icon);
-  };
+  const profile = useSelector((state) => state.editProfile.data);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,14 +48,7 @@ function NavBar() {
               <Linkedin className="fs-2" style={{ color: "#0077b5" }} />
             </Navbar.Brand>
             {/* */}
-            <Form
-              className="d-flex me-4"
-              onClick={() => changeSelectedIcon("search")}
-              style={{
-                border: selectedIcon === "search" ? "2px solid" : "",
-                borderRadius: selectedIcon === "search" ? "8px" : "",
-              }}
-            >
+            <Form className="d-flex me-4">
               <InputGroup>
                 <InputGroup.Text
                   id="basic-addon1"
@@ -79,77 +68,57 @@ function NavBar() {
           </div>
           {/* */}
           <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav className="ms-auto my-1 my-lg-0 align-items-start" style={{ maxHeight: "100px" }} navbarScroll>
-              <Nav.Link
-                href="#action1"
-                onClick={() => changeSelectedIcon("home")}
-                style={{ borderBottom: selectedIcon === "home" ? "2px solid" : "" }}
-              >
-                <div className="py-1 mx-2 text-center">
+          <Navbar.Collapse id="navbarScroll" className="justify-content-end">
+            <Nav className="d-flex align-items-center" style={{ maxHeight: "100px" }} navbarScroll>
+              <NavLink className="undecorated">
+                <div className="py-1 mx-3 text-center">
                   <HouseDoorFill className="mx-2" style={{ fontSize: "1.3rem" }} />
                   <p className="mb-0" style={{ fontSize: "0.75rem" }}>
                     Home
                   </p>
                 </div>
-              </Nav.Link>
+              </NavLink>
 
-              <Nav.Link
-                href="#action2"
-                onClick={() => changeSelectedIcon("rete")}
-                style={{ borderBottom: selectedIcon === "rete" ? "2px solid" : "" }}
-              >
-                <div className="py-1 mx-2 text-center">
+              <NavLink to={"/profile"} className="undecorated">
+                <div className="py-1 mx-3 text-center">
                   <PeopleFill className="mx-2" style={{ fontSize: "1.3rem" }} />
                   <p className="mb-0" style={{ fontSize: "0.75rem" }}>
                     Rete
                   </p>
                 </div>
-              </Nav.Link>
-              <Nav.Link
-                href="#action3"
-                onClick={() => changeSelectedIcon("lavoro")}
-                style={{ borderBottom: selectedIcon === "lavoro" ? "2px solid" : "" }}
-              >
-                <div className="my-1 mx-2 text-center">
+              </NavLink>
+              <NavLink className="undecorated">
+                <div className="my-1 mx-3 text-center">
                   <BriefcaseFill className="mx-2" style={{ fontSize: "1.3rem" }} />
                   <p className="mb-0" style={{ fontSize: "0.75rem" }}>
                     Lavoro
                   </p>
                 </div>
-              </Nav.Link>
-              <Nav.Link
-                href="#action4"
-                onClick={() => changeSelectedIcon("messaggi")}
-                style={{ borderBottom: selectedIcon === "messaggi" ? "2px solid" : "" }}
-              >
-                <div className="py-1 mx-2 text-center">
+              </NavLink>
+              <NavLink className="undecorated">
+                <div className="py-1 mx-3 text-center">
                   <ChatDotsFill className="mx-2" style={{ fontSize: "1.3rem" }} />
                   <p className="mb-0" style={{ fontSize: "0.75rem" }}>
                     Messaggi
                   </p>
                 </div>
-              </Nav.Link>
-              <Nav.Link
-                href="#action5"
-                onClick={() => changeSelectedIcon("notifiche")}
-                style={{ borderBottom: selectedIcon === "notifiche" ? "2px solid" : "" }}
-              >
-                <div className="py-1 mx-2 text-center">
+              </NavLink>
+              <NavLink className="undecorated">
+                <div className="py-1 mx-3 text-center">
                   <BellFill className="mx-2" style={{ fontSize: "1.3rem" }} />
                   <p className="mb-0" style={{ fontSize: "0.75rem" }}>
                     Notifiche
                   </p>
                 </div>
-              </Nav.Link>
-              <div className="py-2 ms-2 pb-0 text-center">
-                <Link to={"/profile/me"}>
+              </NavLink>
+              <div className="py-2 ms-3 pb-0 text-center">
+                <NavLink to={"/profile/me"}>
                   <img
                     src={profile.image}
                     alt="foto profilo"
                     style={{ width: "25px", height: "25px", borderRadius: "50%" }}
                   ></img>
-                </Link>
+                </NavLink>
                 <NavDropdown title="Tu" id="navbarScrollingDropdown" style={{ fontSize: "0.85rem", marginTop: "-5px" }}>
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
