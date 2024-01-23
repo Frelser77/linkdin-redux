@@ -15,6 +15,7 @@ import { MySvg } from "./iconCircle";
 import { useNavigate } from "react-router-dom";
 import ExpModal from "./expModal";
 import EditModal from "./EditModal";
+import FileUploadComponent from "./FileUploadComponent";
 
 function Profile() {
   const profile = useSelector((state) => state.fetchProfile.data);
@@ -25,6 +26,7 @@ function Profile() {
   const [show, setShow] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showExp, setShowExp] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
   const statusPut = useSelector((state) => state.editProfile.status);
   const [showAlert, setShowAlert] = useState(false);
   const [dataToEdit, setDataToEdit] = useState({ ...profile });
@@ -108,6 +110,9 @@ function Profile() {
   const handleCloseExp = () => setShowExp(false);
   const handleShowExp = () => setShowExp(true);
 
+  const handleCloseUpload = () => setShowUpload(false);
+  const handleShowUpload = () => setShowUpload(true);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(editProfile(dataToEdit));
@@ -121,7 +126,9 @@ function Profile() {
 
   useEffect(() => {
     setDataToEdit({ ...profile });
-    dispatch(setEditProfile(profile));
+    if (location.pathname === "/profile/me") {
+      dispatch(setEditProfile(profile));
+    }
   }, [profile]);
 
   useEffect(() => {
@@ -141,21 +148,23 @@ function Profile() {
         <Col>
           <Card className="mb-2 shadow">
             <Card.Header className="bg-primary text-white position-relative" style={{ height: "200px" }}>
-              <Card.Img
-                variant="top"
-                src={profile && profile.image}
-                className="position-absolute"
-                style={{
-                  width: "150px",
-                  height: "150px",
-                  border: "4px solid white",
-                  borderRadius: "50%",
-                  margin: "0 auto",
-                  bottom: "-15%",
-                  zIndex: "1000",
-                  backgroundColor: "gray",
-                }}
-              />
+              <Link onClick={handleShowUpload}>
+                <Card.Img
+                  variant="top"
+                  src={profile && profile.image}
+                  className="position-absolute"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    border: "4px solid white",
+                    borderRadius: "50%",
+                    margin: "0 auto",
+                    bottom: "-15%",
+                    zIndex: "1000",
+                    backgroundColor: "gray",
+                  }}
+                />
+              </Link>
             </Card.Header>
             <Card.Body>
               {location.pathname === "/profile/me" && (
@@ -537,6 +546,11 @@ function Profile() {
 
       {/* MODALE EXPERIENCE */}
       <ExpModal showAlert={showAlert} showExp={showExp} handleCloseExp={handleCloseExp} statusPut={statusPut} />
+
+      {/* MODALE PER L'UPLOAD DELL'IMMAGINE DI PROFILO */}
+      {profile && (
+        <FileUploadComponent showUpload={showUpload} handleCloseUpload={handleCloseUpload} userId={profile._id} />
+      )}
     </>
   );
 }
