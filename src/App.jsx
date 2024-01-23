@@ -5,38 +5,36 @@ import "./App.css";
 import NotFound from "./components/NotFound";
 import { Container } from "react-bootstrap";
 import Profile from "./components/Profile";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchAllProfiles } from "./redux/slice/fetchAllProfilesReducers";
 import AllProfiles from "./components/AllProfiles";
 import NavBar from "./components/NavBar";
 import Experiences from "./components/Experiences";
 
 function App() {
-	const dispatch = useDispatch();
-	const profiles = useSelector((state) => state.fetchAllProfiles.data);
+  const dispatch = useDispatch();
+  //   const profiles = useSelector((state) => state.fetchAllProfiles.data);
 
-	useEffect(() => {
-		if (!profiles) {
-			dispatch(fetchAllProfiles());
-		}
-	}, []);
+  useEffect(() => {
+    dispatch(fetchAllProfiles());
+  }, []);
 
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<NavBar />
-				<Container>
-					<Routes>
-						<Route path="/profile" element={<AllProfiles />} />
-						<Route path="/profile/me" element={<Profile />} />
-						<Route path="/profile/:userId" element={<Profile />} />
-						<Route path="/profile/me/esperienze" element={<Experiences />} />
-						<Route path="*" element={<NotFound />} />
-					</Routes>
-				</Container>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <NavBar />
+        <Container>
+          <Routes>
+            <Route path="/profile" element={<AllProfiles />} />
+            <Route path="/profile/me" element={<Profile />} />
+            <Route path="/profile/:userId" element={<Profile />} />
+            <Route path="/profile/me/esperienze" element={<Experiences />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

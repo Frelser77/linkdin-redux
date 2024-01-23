@@ -18,7 +18,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useSelector } from "react-redux";
 
 function NavBar() {
-  const [selectedIcon, setSelectedIcon] = useState(null);
   const [showSubNavbar, setShowSubNavbar] = useState(false);
   const location = useLocation();
   const profile = useSelector((state) => state.editProfile.data);
@@ -114,7 +113,7 @@ function NavBar() {
               <div className="py-2 ms-3 pb-0 text-center">
                 <NavLink to={"/profile/me"}>
                   <img
-                    src={profile.image}
+                    src={profile && profile.image}
                     alt="foto profilo"
                     style={{ width: "25px", height: "25px", borderRadius: "50%" }}
                   ></img>
@@ -138,17 +137,15 @@ function NavBar() {
               <div className="d-flex align-items-center">
                 <Link to={"/profile/me"}>
                   <img
-                    src={profile.image}
+                    src={profile && profile.image}
                     alt="Profilo"
                     className="rounded-circle me-4"
                     style={{ width: "36px", height: "36px" }}
                   />
                 </Link>
                 <div>
-                  <NavLink className="undecorated fw-bold">
-                    {profile.name} {profile.surname}
-                  </NavLink>
-                  <div className="text-muted">{profile.title}</div>
+                  <NavLink className="undecorated fw-bold">{profile && profile.name + " " + profile.surname}</NavLink>
+                  <div className="text-muted">{profile && profile.title}</div>
                 </div>
               </div>
               {/* Parte destra: Pulsanti */}
