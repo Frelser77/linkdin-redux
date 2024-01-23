@@ -5,14 +5,14 @@ import editProfileReducer from "../slice/editProfileReducer";
 import ExperienceSlice from "../slice/ExperienceSlice";
 
 const rootReducer = combineReducers({
-  fetchProfile: fetchProfileReducer,
-  fetchAllProfiles: fetchAllProfilesReducers,
-  editProfile: editProfileReducer,
-  FetchExperiences: ExperienceSlice,
+	fetchProfile: fetchProfileReducer,
+	fetchAllProfiles: fetchAllProfilesReducers,
+	editProfile: editProfileReducer,
+	fetchExperiences: ExperienceSlice,
 });
 
 export const store = configureStore({
-  reducer: rootReducer,
+	reducer: rootReducer,
 });
 
 export default store;
