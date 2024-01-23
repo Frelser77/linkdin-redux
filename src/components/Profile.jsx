@@ -119,6 +119,10 @@ function Profile() {
 	};
 
 	useEffect(() => {
+		setDataToEdit({ ...profile });
+	}, [profile]);
+
+	useEffect(() => {
 		let queryParam;
 		if (location.pathname === "/profile/me") {
 			queryParam = "me";
