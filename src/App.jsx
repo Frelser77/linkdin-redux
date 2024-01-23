@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProfiles } from "./redux/slice/fetchAllProfilesReducers";
 import AllProfiles from "./components/AllProfiles";
 import NavBar from "./components/NavBar";
+import Experiences from "./components/Experiences";
 
 function App() {
 	const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
 						<Route path="/profile" element={<AllProfiles />} />
 						<Route path="/profile/me" element={<Profile />} />
 						<Route path="/profile/:userId" element={<Profile />} />
+						<Route path="/profile/me/esperienze" element={<Experiences />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Container>
