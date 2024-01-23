@@ -188,7 +188,7 @@ function Profile() {
 								</svg>{" "}
 								Solo per te
 							</Card.Text>
-							<Card.Text className="d-flex border border-1 border-secondary border-start-0 border-top-0 border-end-0 py-3">
+							<div className="d-flex border border-1 border-secondary border-start-0 border-top-0 border-end-0 py-3">
 								<div className="me-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -219,13 +219,13 @@ function Profile() {
 									</svg>
 									<Link className="undecorated"> 2 comparse nei motori di ricerca</Link>
 								</div>
-							</Card.Text>
+							</div>
 						</Card.Body>
 					</Card>
 					<Card className="mb-2 shadow">
 						<Card.Body>
 							<Card.Title className="mb-0">Risorse</Card.Title>
-							<Card.Text className="mb-2 text-muted ">
+							<div className="mb-2 text-muted ">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 16 16"
@@ -239,8 +239,8 @@ function Profile() {
 									<path d="M8 3a8.59 8.59 0 00-8 5 8.54 8.54 0 008 5 8.55 8.55 0 008-5 8.55 8.55 0 00-8-5zm0 8a3 3 0 113-3 3 3 0 01-3 3zm2-3a2 2 0 11-2-2 2 2 0 012 2z"></path>
 								</svg>{" "}
 								Solo per te
-							</Card.Text>
-							<Card.Text className="mb-2 border border-1 border-secondary border-start-0 border-top-0 border-end-0 py-1">
+							</div>
+							<div className="mb-2 border border-1 border-secondary border-start-0 border-top-0 border-end-0 py-1">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -259,9 +259,9 @@ function Profile() {
 										Fatti scoprire, metti in risalto i contenuti sul tuo profilo e accedi agli strumenti di creazione
 									</small>
 								</p>
-							</Card.Text>
+							</div>
 
-							<Card.Text className="mb-2 py-1">
+							<div className="mb-2 py-1">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -278,7 +278,7 @@ function Profile() {
 								<p className="ms-4 mb-0">
 									<small className="ms-1 text-muted">Salva e gestisci i tuoi collegamenti e interessi.</small>
 								</p>
-							</Card.Text>
+							</div>
 						</Card.Body>
 						<Button className="nav-link my-link border border-1 border-secondary border-start-0 border-bottom-0 border-end-0 d-flex align-items-center justify-content-center fw-semibold">
 							<NavLink to={"/risorse"} className="nav-link undecorated my-3">
@@ -298,7 +298,7 @@ function Profile() {
 								)}
 							</div>
 							<Card.Text className="mt-3 mb-4 text-muted">{profile && profile.bio}</Card.Text>
-							<Card.Text className="d-flex py-1 border rounded-2">
+							<div className="d-flex py-1 border rounded-2">
 								<Row className="p-1">
 									<Col xs={2} className="d-flex justify-content-start">
 										<div>
@@ -308,7 +308,7 @@ function Profile() {
 												role="none"
 												data-supported-dps="24x24"
 												fill="currentColor"
-												class="mercado-match"
+												className="mercado-match"
 												width="24"
 												height="24"
 												focusable="false"
@@ -322,7 +322,7 @@ function Profile() {
 										<span className="mb-0 text-muted">{profile && profile.title}</span>
 									</Col>
 								</Row>
-							</Card.Text>
+							</div>
 						</Card.Body>
 					</Card>
 					<Card className="p-3 mb-2 shadow">
@@ -417,9 +417,7 @@ function Profile() {
 								</div>
 							</div>
 							<div className="d-flex align-items-center">
-								<div className="education-logo me-2">
-									<img src={MySvg} alt="description" />
-								</div>
+								<div className="education-logo me-2"></div>
 							</div>
 							<Card.Text>EPICODE SCHOOL</Card.Text>
 							<Card.Text>Lorem Lorem ipsum dolor, sit amet consectetur </Card.Text>
@@ -448,7 +446,9 @@ function Profile() {
 						<Card.Body>
 							<Card.Title>Altri profili consultati</Card.Title>
 							{allProfiles &&
-								allProfiles.map((profile, index) => index < 5 && <ProfileCard key={profile.id} profile={profile} />)}
+								allProfiles.map(
+									(profile, index) => index < 5 && <ProfileCard key={profile.name + profile.id} profile={profile} />
+								)}
 						</Card.Body>
 					</Card>
 				</Col>
