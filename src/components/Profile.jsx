@@ -10,7 +10,7 @@ import { FaHeart, FaPhoneAlt, FaRegCommentDots, FaShareSquare } from "react-icon
 import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
 import { ArrowRight, Linkedin } from "react-bootstrap-icons";
-import { editProfile } from "../redux/slice/editProfileReducer";
+import { editProfile, setEditProfile } from "../redux/slice/editProfileReducer";
 import { MySvg } from "./iconCircle";
 import { useNavigate } from "react-router-dom";
 import ExpModal from "./expModal";
@@ -121,6 +121,7 @@ function Profile() {
 
   useEffect(() => {
     setDataToEdit({ ...profile });
+    dispatch(setEditProfile(profile));
   }, [profile]);
 
   useEffect(() => {
