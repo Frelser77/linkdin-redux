@@ -3,16 +3,18 @@ import fetchProfileReducer from "../slice/fetchProfileReducer";
 import fetchAllProfilesReducers from "../slice/fetchAllProfilesReducers";
 import editProfileReducer from "../slice/editProfileReducer";
 import ExperienceSlice from "../slice/ExperienceSlice";
+import fileUploadReducer from "../slice/fileUploadReducer";
 
 const rootReducer = combineReducers({
-	fetchProfile: fetchProfileReducer,
-	fetchAllProfiles: fetchAllProfilesReducers,
-	editProfile: editProfileReducer,
-	fetchExperiences: ExperienceSlice,
+  fetchProfile: fetchProfileReducer,
+  fetchAllProfiles: fetchAllProfilesReducers,
+  editProfile: editProfileReducer,
+  fetchExperiences: ExperienceSlice,
+  fileUpload: fileUploadReducer,
 });
 
 export const store = configureStore({
-	reducer: rootReducer,
+  reducer: rootReducer,
 });
 
 export default store;
