@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Alert, CardText, Col, Form, FormControl, FormText, Modal, Row } from "react-bootstrap";
+import { Alert, CardBody, CardText, Col, Form, FormControl, FormText, Image, Modal, Row } from "react-bootstrap";
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import { fetchProfile } from "../redux/slice/fetchProfileReducer";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard";
-import { GoPencil } from "react-icons/go";
-import { FaPhoneAlt } from "react-icons/fa";
+import { GoPencil, GoPlus } from "react-icons/go";
+import { FaHeart, FaPhoneAlt, FaRegCommentDots, FaShareSquare } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
-import { Linkedin } from "react-bootstrap-icons";
-import {
-	editProfile,
-	setArea,
-	setBio,
-	setEmail,
-	setImage,
-	setName,
-	setSurname,
-	setTitle,
-	setUsername,
-} from "../redux/slice/editProfileReducer";
-
+import { ArrowRight, Linkedin, PencilSquare, PlusSquare } from "react-bootstrap-icons";
+import { editProfile } from "../redux/slice/editProfileReducer";
+// import Icona from "";
 function Profile() {
 	const profile = useSelector((state) => state.fetchProfile.data);
 	const dispatch = useDispatch();
@@ -32,8 +22,72 @@ function Profile() {
 	const [showSecond, setShowSecond] = useState(false);
 	const statusPut = useSelector((state) => state.editProfile.status);
 	const [showAlert, setShowAlert] = useState(false);
-
 	const [dataToEdit, setDataToEdit] = useState({ ...profile });
+	const [activeSection, setActiveSection] = useState("post");
+	const logoUrl =
+		"https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
+
+	// STATO FITTIZZIO
+	const experiences = [
+		{
+			title: "Riempimento dinamico",
+			company: "Riempimento dinamico",
+			period: "Riempimento dinamico",
+			duration: "Riempimento dinamico",
+			location: "Riempimento dinamico",
+			skills: [
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+				"Riempimento dinamico",
+			],
+		},
+		// Aggiungere qui altre esperienze
+	];
+
+	const renderSectionContent = () => {
+		switch (activeSection) {
+			case "post":
+				return (
+					<Card className="mb-3">
+						<Card.Body className="d-flex align-items-center justify-content-between">
+							<div className="d-flex flex-column">
+								<Card.Title>Titolo del Post</Card.Title>
+								<Card.Text>Questo è il contenuto di un post.</Card.Text>
+							</div>
+						</Card.Body>
+						<Card.Footer>
+							<Button variant="link" className="text-decoration-none">
+								<FaHeart /> 9
+							</Button>
+							<Button variant="link" className="text-decoration-none">
+								<FaRegCommentDots /> 2 commenti
+							</Button>
+							<Button variant="link" className="text-decoration-none">
+								<FaShareSquare /> Condividi
+							</Button>
+						</Card.Footer>
+					</Card>
+				);
+			case "commenti":
+				return (
+					// Contenuto della sezione Commenti
+					"NO COMMENT"
+				);
+			case "immagini":
+				return (
+					// Contenuto della sezione Immagini
+					"NO IMAGE"
+				);
+			default:
+				return null;
+		}
+	};
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -195,7 +249,7 @@ function Profile() {
 								</p>
 							</Card.Text>
 
-							<Card.Text className="mb-2 border border-1 border-secondary border-start-0 border-top-0 border-end-0 py-1">
+							<Card.Text className="mb-2 py-1">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -214,10 +268,21 @@ function Profile() {
 								</p>
 							</Card.Text>
 						</Card.Body>
+						<Button className="nav-link my-link border border-1 border-secondary border-start-0 border-bottom-0 border-end-0 d-flex align-items-center justify-content-center fw-semibold">
+							<NavLink to={"/risorse"} className="nav-link undecorated my-3">
+								Mostra tutte le risorse(5)
+								<ArrowRight className="fs-6 ms-1" />
+							</NavLink>
+						</Button>
 					</Card>
 					<Card className="mb-2 shadow">
 						<Card.Body>
-							<Card.Title className="mb-0">Informazioni</Card.Title>
+							<div className="d-flex align-items-center justify-content-between m-1">
+								<Card.Title className="mb-0">Informazioni</Card.Title>
+								<Button className="pencil px-2">
+									<GoPencil className="fs-4" />
+								</Button>
+							</div>
 							<Card.Text className="mt-3 mb-4 text-muted">{profile && profile.bio}</Card.Text>
 							<Card.Text className="d-flex py-1 border rounded-2">
 								<Row className="p-1">
@@ -245,6 +310,100 @@ function Profile() {
 								</Row>
 							</Card.Text>
 						</Card.Body>
+					</Card>
+					<Card className="p-3 mb-2 shadow">
+						<div className="d-flex align-items-center justify-content-between m-1">
+							<div className="d-flex flex-column justify-content-between align-items-start mb-3">
+								<h2>Attività</h2>
+								<p>29 follower</p>
+							</div>
+							<Button variant="outline-primary" className="btn rounded-pill">
+								Crea un post
+							</Button>
+						</div>
+						<div className="d-flex justify-content-start mb-3">
+							<Button
+								variant={activeSection === "post" ? "success" : "outline-secondary"}
+								onClick={() => setActiveSection("post")}
+								className="me-2"
+							>
+								Post
+							</Button>
+							<Button
+								variant={activeSection === "commenti" ? "success" : "outline-secondary"}
+								onClick={() => setActiveSection("commenti")}
+								className="me-2"
+							>
+								Commenti
+							</Button>
+							<Button
+								variant={activeSection === "immagini" ? "success" : "outline-secondary"}
+								onClick={() => setActiveSection("immagini")}
+							>
+								Immagini
+							</Button>
+						</div>
+						{renderSectionContent()}
+					</Card>
+					<Card className="mb-2 shadow">
+						<Card.Title className="fs-4 d-flex justify-content-between align-items-center p-2 mx-2 my-1">
+							Esperienza
+							<div>
+								<Button className="me-2 pencil px-2">
+									<GoPlus className="fs-3" />
+								</Button>
+								<Button className="pencil px-2">
+									<GoPencil className="fs-4" />
+								</Button>
+							</div>
+						</Card.Title>
+						<CardBody>
+							{experiences.map((exp, index) => (
+								<ListGroup.Item key={index}>
+									<Card.Title>{exp.title}</Card.Title>
+									<div>
+										{exp.company} · {exp.period}
+									</div>
+									<div>{exp.location}</div>
+									<Card.Text>Competenze: {exp.skills.join(" · ")}</Card.Text>
+								</ListGroup.Item>
+							))}
+						</CardBody>
+					</Card>
+					<Card className="mb-2 shadow p-2">
+						<Card.Title className="fs-4 d-flex justify-content-between align-items-center mx-2 my-1">
+							Formazione
+							<div>
+								<Button className="me-2 pencil px-2">
+									<GoPlus />
+								</Button>
+								<Button className="pencil px-2">
+									<GoPencil />
+								</Button>
+							</div>
+						</Card.Title>
+						<CardBody>
+							<div className="d-flex align-items-center">
+								<div className="education-logo me-2">
+									<Image src={logoUrl} style={{ width80: "80px", height: "80px" }}></Image>
+								</div>
+								<div>
+									<Card.Title>EPICODE</Card.Title>
+									<Card.Subtitle className="mb-2 text-muted">ott 2023 - mag 2024</Card.Subtitle>
+								</div>
+							</div>
+							<div className="d-flex align-items-center">
+								<div className="education-logo me-2">SVG</div>
+							</div>
+							<Card.Text>EPICODE SCHOOL</Card.Text>
+							<Card.Text>Lorem Lorem ipsum dolor, sit amet consectetur </Card.Text>
+							<Card.Text>set 2010 - lug 2016</Card.Text>
+							<Card.Text>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam voluptatum quis totam cumque nemo, eius
+								non blanditiis deleniti recusandae accusantium ipsum laborum, obcaecati dolore molestias eaque
+								temporibus, excepturi dolorem eum.
+							</Card.Text>
+						</CardBody>
 					</Card>
 				</Col>
 				{/* SIDE BAR */}
@@ -277,6 +436,7 @@ function Profile() {
 					<Form className="mx-2">
 						<div className="d-flex align-items-center justify-content-between">
 							<FormText className="fs-5 text-black">Informazioni di contatto</FormText>
+
 							<Button
 								className="pencil px-2"
 								onClick={() => {
