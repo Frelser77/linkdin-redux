@@ -32,8 +32,10 @@ body {
 
 .sub-navbar {
 	position: sticky;
-	top: 20px;
-	transition: all 0.3s ease-in-out;
+	top: 68px;
+	background-color: rgba(247, 247, 247, 1);
+	transition: transform 0.5s ease-in-out;
+	border-top: 1px solid gray;
 }
 
 .pencil {
