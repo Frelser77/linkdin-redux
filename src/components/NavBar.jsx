@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -79,8 +79,8 @@ function NavBar() {
           </div>
           {/* */}
           <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll" className="px-3">
-            <Nav className="ms-auto my-1 my-lg-0 mx-4 align-items-start" style={{ maxHeight: "100px" }} navbarScroll>
+          <Navbar.Collapse id="navbarScroll">
+            <Nav className="ms-auto my-1 my-lg-0 align-items-start" style={{ maxHeight: "100px" }} navbarScroll>
               <Nav.Link
                 href="#action1"
                 onClick={() => changeSelectedIcon("home")}
@@ -142,12 +142,14 @@ function NavBar() {
                   </p>
                 </div>
               </Nav.Link>
-              <div className="py-2 mx-2 pb-0 text-center">
-                <img
-                  src={profile.image}
-                  alt="foto profilo"
-                  style={{ width: "25px", height: "25px", borderRadius: "50%" }}
-                ></img>
+              <div className="py-2 ms-2 pb-0 text-center">
+                <Link to={"/profile/me"}>
+                  <img
+                    src={profile.image}
+                    alt="foto profilo"
+                    style={{ width: "25px", height: "25px", borderRadius: "50%" }}
+                  ></img>
+                </Link>
                 <NavDropdown title="Tu" id="navbarScrollingDropdown" style={{ fontSize: "0.85rem", marginTop: "-5px" }}>
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -160,21 +162,27 @@ function NavBar() {
         </Container>
       </Navbar>
       {showSubNavbar && (
-        <Container fluid className="sub-navbar bg-white shadow-sm py-2 sticky-top" style={{ top: "56px" }}>
+        <Container
+          fluid
+          className="sub-navbar shadow-sm mt-1 py-2 sticky-top"
+          style={{ top: "56px", backgroundColor: "rgba(230,230,230, 0.90)" }}
+        >
           <Container>
             <div className="d-flex align-items-center justify-content-between">
               {/* Parte sinistra: Profilo utente */}
               <div className="d-flex align-items-center">
-                <img
-                  src={profile.image}
-                  alt="Profilo"
-                  className="rounded-circle me-4"
-                  style={{ width: "36px", height: "36px" }}
-                />
+                <Link to={"/profile/me"}>
+                  <img
+                    src={profile.image}
+                    alt="Profilo"
+                    className="rounded-circle me-4"
+                    style={{ width: "36px", height: "36px" }}
+                  />
+                </Link>
                 <div>
-                  <div className="fw-bold">
+                  <NavLink className="undecorated fw-bold">
                     {profile.name} {profile.surname}
-                  </div>
+                  </NavLink>
                   <div className="text-muted">{profile.title}</div>
                 </div>
               </div>
