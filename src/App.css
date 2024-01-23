@@ -1,56 +1,58 @@
 body {
-	background-color: #f4f2ee;
+  background-color: #f4f2ee;
 }
 
 .btn-outline-secondary {
-	transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 .btn-outline-secondary:hover {
-	background-color: #ebebeb;
-	color: white;
-	color: grey;
+  background-color: #ebebeb;
+  color: white;
+  color: grey;
 }
 
 .btn-outline-primary:hover {
-	background-color: #e2f0fe;
-	color: #0a66c2;
+  background-color: #e2f0fe;
+  color: #0a66c2;
 }
 
 .undecorated {
-	text-decoration: none;
-	color: gray;
+  text-decoration: none;
+  color: gray;
 }
 
 .undecorated:hover {
-	text-decoration: underline;
-	color: unset;
+  text-decoration: underline;
+  color: unset;
 }
 
 .modal-dialog {
-	max-width: 600px;
+  max-width: 600px;
 }
 
 .sub-navbar {
-	position: sticky;
-	top: 20px;
-	transition: transform 0.3s ease-in-out;
+  position: sticky;
+  top: 68px;
+  background-color: rgba(247, 247, 247, 1);
+  transition: transform 0.5s ease-in-out;
+  border-top: 1px solid gray;
 }
 
 .pencil {
-	background-color: transparent;
-	border: none;
-	border-radius: 50%;
-	color: rgb(69, 69, 69);
-	cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: rgb(69, 69, 69);
+  cursor: pointer;
 }
 .pencil:hover {
-	background-color: rgba(193, 193, 193, 0.712);
+  background-color: rgba(193, 193, 193, 0.712);
 }
 
 .btn.nav-link.my-link {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 .nav-link.my-link:hover {
-	background-color: #ebebeb;
+  background-color: #ebebeb;
 }

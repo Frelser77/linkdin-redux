@@ -162,11 +162,7 @@ function NavBar() {
         </Container>
       </Navbar>
       {showSubNavbar && (
-        <Container
-          fluid
-          className="sub-navbar shadow-sm mt-1 py-2 sticky-top"
-          style={{ top: "56px", backgroundColor: "rgba(230,230,230, 0.90)" }}
-        >
+        <Container fluid className="sub-navbar shadow-sm py-1 sticky-top">
           <Container>
             <div className="d-flex align-items-center justify-content-between">
               {/* Parte sinistra: Profilo utente */}
