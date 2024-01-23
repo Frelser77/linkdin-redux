@@ -9,9 +9,10 @@ import { GoPencil, GoPlus } from "react-icons/go";
 import { FaHeart, FaPhoneAlt, FaRegCommentDots, FaShareSquare } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
-import { ArrowRight, Linkedin, PencilSquare, PlusSquare } from "react-bootstrap-icons";
+import { ArrowRight, Linkedin } from "react-bootstrap-icons";
 import { editProfile } from "../redux/slice/editProfileReducer";
-// import Icona from "";
+import { MySvg } from "./iconCircle";
+import { addExperience } from "../redux/slice/ExperienceSlice";
 function Profile() {
 	const profile = useSelector((state) => state.fetchProfile.data);
 	const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function Profile() {
 	const allProfiles = useSelector((state) => state.fetchAllProfiles.data);
 	const [show, setShow] = useState(false);
 	const [showSecond, setShowSecond] = useState(false);
+	const [showExp, setShowExp] = useState(false);
 	const statusPut = useSelector((state) => state.editProfile.status);
 	const [showAlert, setShowAlert] = useState(false);
 	const [dataToEdit, setDataToEdit] = useState({ ...profile });
@@ -94,6 +96,9 @@ function Profile() {
 
 	const handleCloseSecond = () => setShowSecond(false);
 	const handleShowSecond = () => setShowSecond(true);
+
+	const handleCloseExp = () => setShowExp(false);
+	const handleShowExp = () => setShowExp(true);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -349,7 +354,7 @@ function Profile() {
 						<Card.Title className="fs-4 d-flex justify-content-between align-items-center p-2 mx-2 my-1">
 							Esperienza
 							<div>
-								<Button className="me-2 pencil px-2">
+								<Button className="me-2 pencil px-2" onClick={handleShowExp}>
 									<GoPlus className="fs-3" />
 								</Button>
 								<Button className="pencil px-2">
@@ -393,7 +398,9 @@ function Profile() {
 								</div>
 							</div>
 							<div className="d-flex align-items-center">
-								<div className="education-logo me-2">SVG</div>
+								<div className="education-logo me-2">
+									<img src={MySvg} alt="description" />
+								</div>
 							</div>
 							<Card.Text>EPICODE SCHOOL</Card.Text>
 							<Card.Text>Lorem Lorem ipsum dolor, sit amet consectetur </Card.Text>
@@ -493,6 +500,110 @@ function Profile() {
 			</Modal>
 
 			<Modal show={showSecond} onHide={handleCloseSecond} dialogClassName="editProfileModal">
+				<Modal.Header closeButton>
+					<Modal.Title>Modifica di presentazione</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form className="mx-2" onSubmit={handleSubmit}>
+						{showAlert === true && statusPut === "success" ? (
+							<Alert variant="success">Modifica avvenuta con successo</Alert>
+						) : (
+							""
+						)}
+						{showAlert === true && statusPut === "failed" ? (
+							<Alert variant="warining">Errore nella modifica dei dati</Alert>
+						) : (
+							""
+						)}
+						<Form.Group className="mb-3" controlId="editForm.ControlInput1">
+							<Form.Label className="fw-semibold w-100">
+								Nome
+								<FormControl
+									value={dataToEdit.name}
+									placeholder="Inserisci il tuo nome"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, name: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput2">
+							<Form.Label className="fw-semibold w-100">
+								Cognome
+								<FormControl
+									value={dataToEdit.surname}
+									placeholder="Inserisci il tuo cognome"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, surname: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput3">
+							<Form.Label className="fw-semibold w-100">
+								Email
+								<FormControl
+									value={dataToEdit.email}
+									placeholder="mariorossi@gmail.com"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, email: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput4">
+							<Form.Label className="fw-semibold w-100">
+								Username
+								<FormControl
+									value={dataToEdit.username}
+									placeholder="mario_rossi"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, usernam: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput5">
+							<Form.Label className="fw-semibold w-100">
+								Titolo
+								<FormControl
+									value={dataToEdit.title}
+									placeholder="Attore"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, title: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput6">
+							<Form.Label className="fw-semibold w-100">
+								Bio
+								<FormControl
+									value={dataToEdit.bio}
+									placeholder="Biografia"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, bio: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput7">
+							<Form.Label className="fw-semibold w-100">
+								Località
+								<FormControl
+									value={dataToEdit.area}
+									placeholder="Località"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, area: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<Form.Group className="mb-3 d-flex align-items-start w-100" controlId="editForm.ControlInput8">
+							<Form.Label className="fw-semibold w-100">
+								Immagine
+								<FormControl
+									value={dataToEdit.image}
+									placeholder="Immagine"
+									onChange={(e) => setDataToEdit({ ...dataToEdit, image: e.target.value })}
+								/>
+							</Form.Label>
+						</Form.Group>
+						<div className="d-flex justify-content-end">
+							<Button type="submit">Save</Button>
+						</div>
+					</Form>
+				</Modal.Body>
+			</Modal>
+
+			{/* MODALE EXPERIENCE */}
+			<Modal show={showExp} onHide={handleCloseExp} dialogClassName="addExpModal">
 				<Modal.Header closeButton>
 					<Modal.Title>Modifica di presentazione</Modal.Title>
 				</Modal.Header>
