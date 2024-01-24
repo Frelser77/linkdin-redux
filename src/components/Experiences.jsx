@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExperiences, selectAllExperiencesData } from "../redux/slice/ExperienceSlice";
+import {
+  fetchExperiences,
+  selectAllExperiencesData,
+  setExperienceArea,
+  setExperienceCompany,
+  setExperienceDescription,
+  setExperienceEndDate,
+  setExperienceRole,
+  setExperienceStartDate,
+} from "../redux/slice/ExperienceSlice";
 import { Button, Card, CardBody, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
 import { GoPencil } from "react-icons/go";
 import { FaTrashCan } from "react-icons/fa6";
 import { token } from "../token";
+import ExpModal from "./ExpModal";
 
 export const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -18,6 +28,12 @@ function Experiences() {
   const location = useLocation();
   const params = useParams();
   const [experience, setExperience] = useState(null);
+  const [showExp, setShowExp] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [status, setStatus] = useState(false);
+
+  const handleCloseExp = () => setShowExp(false);
+  const handleShowExp = () => setShowExp(true);
 
   const fetchExperience = async (userId, expId) => {
     try {
@@ -31,11 +47,26 @@ function Experiences() {
           },
         }
       );
+      if (!response.ok) {
+        console.log("errore boh");
+      }
+      setStatus(true);
       const data = await response.json();
       setExperience(data);
+      dispatch(setExperienceRole(data.role));
+      dispatch(setExperienceCompany(data.company));
+      dispatch(setExperienceStartDate(data.startDate.split("T")[0]));
+      dispatch(setExperienceEndDate(data.endDate.split("T")[0]));
+      dispatch(setExperienceDescription(data.description));
+      dispatch(setExperienceArea(data.area));
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handlePencilClickExp = (userId, expId) => {
+    fetchExperience(userId, expId);
+    handleShowExp();
   };
 
   useEffect(() => {
@@ -43,6 +74,8 @@ function Experiences() {
     queryParam = params.userId;
     dispatch(fetchExperiences(queryParam));
   }, []);
+
+  useEffect(() => {}, [experiences]);
 
   return (
     <Container>
@@ -55,7 +88,7 @@ function Experiences() {
                 <Card.Header className="d-flex justify-content-between">
                   <p className="h5 mb-0 mt-2">{exp.role}</p>
                   <div className="d-flex align-items-center">
-                    <Button variant="transparent">
+                    <Button variant="transparent" onClick={() => handlePencilClickExp(exp.user, exp._id)}>
                       <GoPencil className="fs-5" />
                     </Button>
                     <Button variant="transparent">
@@ -104,6 +137,17 @@ function Experiences() {
           </Col>
         )}
       </Row>
+
+      {experience && (
+        <ExpModal
+          showAlert={showAlert}
+          showExp={showExp}
+          handleCloseExp={handleCloseExp}
+          statusPut={status}
+          userId={experience.user}
+          expId={experience._id}
+        />
+      )}
     </Container>
   );
 }

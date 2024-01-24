@@ -43,6 +43,9 @@ export const addExperience = createAsyncThunk(
 export const editExperience = createAsyncThunk(
   "experiences/editExperience",
   async ({ userId, expId, experienceData }, thunkAPI) => {
+    console.log("expId: ", expId);
+    console.log("userId: ", userId);
+    console.log("experienceData: ", experienceData);
     try {
       const response = await fetch(`${BASE_URL}${userId}/experiences/${expId}`, {
         method: "PUT",
@@ -114,9 +117,6 @@ const experiencesSlice = createSlice({
     setExperienceArea: (state, action) => {
       state.experience.area = action.payload;
     },
-    setExperienceUser: (state, action) => {
-      state.experience.user = action.payload;
-    },
     resetExperience: (state) => {
       state.experience = {
         role: "",
@@ -182,7 +182,6 @@ export const {
   setExperienceStartDate,
   setExperienceDescription,
   setExperienceEndDate,
-  setExperienceUser,
   resetExperience,
 } = experiencesSlice.actions;
 export default experiencesSlice.reducer;

@@ -2,6 +2,7 @@ import { Alert, Button, Form, FormControl, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addExperience,
+  editExperience,
   resetExperience,
   setExperienceArea,
   setExperienceCompany,
@@ -11,13 +12,15 @@ import {
   setExperienceStartDate,
 } from "../redux/slice/ExperienceSlice";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const ExpModal = ({ showExp, handleCloseExp, userId }) => {
+const ExpModal = ({ showExp, expId, handleCloseExp, userId }) => {
   const max = new Date().toISOString().split("T")[0];
   const experience = useSelector((state) => state.fetchExperiences.experience);
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const status = useSelector((state) => state.fetchExperiences.status);
+  const location = useLocation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,14 +34,25 @@ const ExpModal = ({ showExp, handleCloseExp, userId }) => {
       area: experience.area,
     };
 
-    const payload = {
-      userId: userId,
-      experienceData: experienceData,
-    };
-
-    console.log("from submit: " + experienceData);
     setShowAlert(true);
-    dispatch(addExperience(payload));
+
+    if (location.pathname === "/profile/me") {
+      console.log("dentro profile");
+      const payload = {
+        userId: userId,
+        experienceData: experienceData,
+      };
+      dispatch(addExperience(payload));
+    } else {
+      console.log("fuori profile");
+      const payload = {
+        userId: userId,
+        expId: expId,
+        experienceData: experienceData,
+      };
+      console.log(payload);
+      dispatch(editExperience(payload));
+    }
     setTimeout(() => {
       setShowAlert(false);
       handleCloseExp();
