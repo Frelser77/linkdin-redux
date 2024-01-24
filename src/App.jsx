@@ -13,6 +13,7 @@ import Experiences from "./components/Experiences";
 import Footer from "./components/Footer";
 import fetchMyProfile from "./redux/slice/fetchMyProfile";
 import Home from "./components/home/Home";
+import { fetchAllPosts } from "./redux/slice/fetchPostReducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchAllProfiles());
     // dispatch(fetchMyProfile());
+    dispatch(fetchAllPosts());
   }, []);
 
   return (

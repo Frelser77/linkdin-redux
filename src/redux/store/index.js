@@ -5,6 +5,7 @@ import editProfileReducer from "../slice/editProfileReducer";
 import ExperienceSlice from "../slice/ExperienceSlice";
 import fileUploadReducer from "../slice/fileUploadReducer";
 import fetchMyProfile from "../slice/fetchMyProfile";
+import fetchPostReducer from "../slice/fetchPostReducer";
 
 const rootReducer = combineReducers({
   fetchProfile: fetchProfileReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   fetchExperiences: ExperienceSlice,
   fileUpload: fileUploadReducer,
   fetchMyProfile: fetchMyProfile,
+  fetchPost: fetchPostReducer,
 });
 
 export const store = configureStore({

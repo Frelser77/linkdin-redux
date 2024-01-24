@@ -1,116 +1,120 @@
 body {
-	background-color: #f4f2ee;
+  background-color: #f4f2ee;
 }
 
 .btn-outline-secondary {
-	transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 .btn-outline-secondary:hover {
-	background-color: #ebebeb;
-	color: white;
-	color: grey;
+  background-color: #ebebeb;
+  color: white;
+  color: grey;
 }
 
 .btn-outline-primary:hover {
-	background-color: #e2f0fe;
-	color: #0a66c2;
+  background-color: #e2f0fe;
+  color: #0a66c2;
 }
 
 .undecorated {
-	text-decoration: none;
-	color: gray;
+  text-decoration: none;
+  color: gray;
 }
 
 .undecorated:hover {
-	text-decoration: underline;
-	color: unset;
+  text-decoration: underline;
+  color: unset;
 }
 
 .modal-dialog {
-	max-width: 600px;
+  max-width: 600px;
 }
 
 .sub-navbar {
-	position: sticky;
-	top: 68px;
-	background-color: rgba(247, 247, 247, 1);
-	transition: transform 0.5s ease-in-out;
-	border-top: 1px solid gray;
+  position: sticky;
+  top: 68px;
+  background-color: rgba(247, 247, 247, 1);
+  transition: transform 0.5s ease-in-out;
+  border-top: 1px solid gray;
+}
+
+.bannerTop {
+  top: 76px;
 }
 
 .pencil {
-	background-color: transparent;
-	border: none;
-	border-radius: 50%;
-	color: rgb(69, 69, 69);
-	cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: rgb(69, 69, 69);
+  cursor: pointer;
 }
 .pencil:hover {
-	background-color: rgba(193, 193, 193, 0.712);
+  background-color: rgba(193, 193, 193, 0.712);
 }
 
 .btn.nav-link.my-link {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 .nav-link.my-link:hover {
-	background-color: #ebebeb;
+  background-color: #ebebeb;
 }
 
 /* DROPDWON LINGUE FOOTER */
 .tab-container {
-	display: flex;
-	gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .tab {
-	cursor: pointer;
-	padding: 10px;
-	color: grey;
-	border-bottom: 3px solid transparent;
-	transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  padding: 10px;
+  color: grey;
+  border-bottom: 3px solid transparent;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .tab:hover {
-	background-color: rgba(128, 128, 128, 0.13);
+  background-color: rgba(128, 128, 128, 0.13);
 }
 
 .tab.active {
-	color: green;
-	border-bottom-color: green;
+  color: green;
+  border-bottom-color: green;
 }
 
 .langDrop {
-	max-height: 300px;
-	overflow-y: auto;
-	width: 305px;
-	font-size: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 305px;
+  font-size: 12px;
 }
 
 .dropHover:hover {
-	background-color: #0d6efd;
-	color: white;
+  background-color: #0d6efd;
+  color: white;
 }
 
 .btn.show {
-	border: none;
-	border-color: transparent;
-	background-color: transparent;
+  border: none;
+  border-color: transparent;
+  background-color: transparent;
 }
 
 #dropdown-basic.btn {
-	background-color: transparent;
-	border-color: transparent;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .border.dropdown:hover {
-	border: 3px solid black;
+  border: 3px solid black;
 }
 
 .border.dropdown:active {
-	border: 3px solid black;
+  border: 3px solid black;
 }
 
 #mini-footer small {
-	font-size: 12px;
+  font-size: 12px;
 }
