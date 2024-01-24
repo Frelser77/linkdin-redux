@@ -9,38 +9,56 @@ import {
   setExperienceEndDate,
   setExperienceRole,
   setExperienceStartDate,
-  setExperienceUser,
 } from "../redux/slice/ExperienceSlice";
+import { useState } from "react";
 
-const ExpModal = ({ showExp, handleCloseExp, showAlert, statusPut, userId }) => {
+const ExpModal = ({ showExp, handleCloseExp, userId }) => {
   const max = new Date().toISOString().split("T")[0];
   const experience = useSelector((state) => state.fetchExperiences.experience);
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+  const status = useSelector((state) => state.fetchExperiences.status);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("from submit: " + experience);
-    dispatch(addExperience({ userId, experience }));
+    const experienceData = {
+      role: experience.role,
+      company: experience.company,
+      startDate: experience.startDate,
+      endDate: experience.endDate,
+      description: experience.description,
+      area: experience.area,
+    };
+
+    const payload = {
+      userId: userId,
+      experienceData: experienceData,
+    };
+
+    console.log("from submit: " + experienceData);
+    setShowAlert(true);
+    dispatch(addExperience(payload));
+    setTimeout(() => {
+      setShowAlert(false);
+      handleCloseExp();
+      dispatch(resetExperience());
+    }, 3000);
   };
 
   return (
     <Modal show={showExp} onHide={handleCloseExp} dialogClassName="addExpModal">
       <Modal.Header closeButton>
-        <Modal.Title>Modifica di presentazione</Modal.Title>
+        <Modal.Title>Aggiungi un'esperienza</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form className="mx-2" onSubmit={(event) => handleSubmit(event)}>
-          {showAlert === true && statusPut === "success" ? (
-            <Alert variant="success">Modifica avvenuta con successo</Alert>
+          {showAlert === true && status === "succeeded" ? (
+            <Alert variant="success">Esperienza aggiunta con successo</Alert>
           ) : (
             ""
           )}
-          {showAlert === true && statusPut === "failed" ? (
-            <Alert variant="warining">Errore nella modifica dei dati</Alert>
-          ) : (
-            ""
-          )}
+          {showAlert === true && status === "failed" ? <Alert variant="warning">Errore nell'invio dei dati</Alert> : ""}
           <Form.Group className="mb-3" controlId="editForm.ControlInput1">
             <Form.Label className="fw-semibold w-100">
               Ruolo

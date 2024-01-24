@@ -11,7 +11,8 @@ import AllProfiles from "./components/AllProfiles";
 import NavBar from "./components/NavBar";
 import Experiences from "./components/Experiences";
 import Footer from "./components/Footer";
-import { fetchProfile } from "./redux/slice/fetchProfileReducer";
+import fetchMyProfile from "./redux/slice/fetchMyProfile";
+import Home from "./components/home/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllProfiles());
-    dispatch(fetchProfile("/profile/me"));
+    // dispatch(fetchMyProfile());
   }, []);
 
   return (
@@ -28,6 +29,7 @@ function App() {
         <NavBar />
         <Container>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/profile" element={<AllProfiles />} />
             <Route path="/profile/me" element={<Profile />} />
             <Route path="/profile/:userId" element={<Profile />} />

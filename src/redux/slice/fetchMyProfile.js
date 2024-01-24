@@ -7,9 +7,9 @@ const initialState = {
   error: "",
 };
 
-export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (queryParam, { rejectWithValue }) => {
+export const fetchMyProfile = createAsyncThunk("profile/fetchMyProfile", async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${queryParam}`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/profile/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,8 +26,8 @@ export const fetchProfile = createAsyncThunk("profile/fetchProfile", async (quer
   }
 });
 
-const fetchProfileSlice = createSlice({
-  name: "fetchProfile",
+const fetchMyProfileSlice = createSlice({
+  name: "fetchMyProfile",
   initialState,
   reducers: {
     setData: (state, action) => {
@@ -36,19 +36,19 @@ const fetchProfileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProfile.pending, (state) => {
+      .addCase(fetchMyProfile.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchProfile.fulfilled, (state, action) => {
+      .addCase(fetchMyProfile.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
       })
-      .addCase(fetchProfile.rejected, (state, action) => {
+      .addCase(fetchMyProfile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });
   },
 });
-export const selectProfileData = (state) => state.fetchProfile.data;
-export const { setData } = fetchProfileSlice.actions;
-export default fetchProfileSlice.reducer;
+export const selectMyProfileData = (state) => state.fetchMyProfile.data;
+export const { setData } = fetchMyProfileSlice.actions;
+export default fetchMyProfileSlice.reducer;

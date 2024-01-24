@@ -30,11 +30,7 @@ export const addExperience = createAsyncThunk(
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          ...experienceData,
-          startDate: experienceData.startDate + "T00:09:30.949Z",
-          endDate: experienceData.endDate !== "" && experienceData.endDate + "T00:09:30.949Z",
-        }),
+        body: JSON.stringify(experienceData),
       });
       const data = await response.json();
       return data;
