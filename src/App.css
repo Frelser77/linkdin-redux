@@ -42,6 +42,28 @@ body {
   top: 76px;
 }
 
+.card-transition {
+  transition: opacity 0.8s ease-out, transform 1.2s ease-out, max-height 1.5s ease-out;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(0);
+  max-height: 0;
+  display: inline-block;
+}
+
+.card-visible {
+  transition: opacity 0.8s ease-in, transform 1.8s ease-in, max-height 1.5s ease-in;
+  opacity: 1;
+  overflow: hidden;
+  transform: translateX(0);
+  max-height: 500px;
+  display: inline-block;
+}
+
+.banner-container {
+  height: 310px;
+}
+
 .pencil {
   background-color: transparent;
   border: none;
@@ -117,4 +139,67 @@ body {
 
 #mini-footer small {
   font-size: 12px;
+}
+
+.col-1of16 {
+  width: 6.25%;
+}
+
+.col-2of16 {
+  width: 12.5%;
+}
+
+.col-3of16 {
+  width: 18.75%;
+}
+
+.col-4of16 {
+  width: 25%;
+}
+
+.col-5of16 {
+  width: 31.25%;
+}
+
+.col-6of16 {
+  width: 37.5%;
+}
+
+.col-7of16 {
+  width: 43.75%;
+}
+.col-8of16 {
+  width: 50%;
+}
+
+.col-9of16 {
+  width: 56.25%;
+}
+
+.col-10of16 {
+  width: 62.5%;
+}
+
+.col-11of16 {
+  width: 68.75%;
+}
+
+.col-12of16 {
+  width: 75%;
+}
+
+.col-13of16 {
+  width: 81.25%;
+}
+
+.col-14of16 {
+  width: 87.5%;
+}
+
+.col-15of16 {
+  width: 93.75%;
+}
+
+.col-16of16 {
+  width: 100%;
 }

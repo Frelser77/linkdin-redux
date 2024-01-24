@@ -11,9 +11,9 @@ import AllProfiles from "./components/AllProfiles";
 import NavBar from "./components/NavBar";
 import Experiences from "./components/Experiences";
 import Footer from "./components/Footer";
-import fetchMyProfile from "./redux/slice/fetchMyProfile";
 import Home from "./components/home/Home";
 import { fetchAllPosts } from "./redux/slice/fetchPostReducer";
+import { fetchMyProfile } from "./redux/slice/fetchMyProfileReducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllProfiles());
-    // dispatch(fetchMyProfile());
     dispatch(fetchAllPosts());
+    dispatch(fetchMyProfile());
   }, []);
 
   return (

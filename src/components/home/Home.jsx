@@ -2,26 +2,20 @@ import { Col, Row } from "react-bootstrap";
 import ProfileCardHome from "./ProfileCardHome";
 import HomeMain from "./HomeMain";
 import HomeAside from "./HomeAside";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
-  const postList = useSelector((state) => state.fetchPost.postList);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(postList);
-  });
 
   return (
     <Row className="my-4">
-      <Col xs={3}>
+      <Col className="col-3of16">
         <ProfileCardHome />
       </Col>
-      <Col xs={6}>
+      <Col className="col-9of16">
         <HomeMain />
       </Col>
-      <Col xs={3}>
+      <Col className="col-4of16">
         <HomeAside />
       </Col>
     </Row>

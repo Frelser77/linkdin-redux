@@ -1,48 +1,74 @@
-import { Card, Col, FormControl, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Button, Card, Col, Form, FormControl, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { HiPhoto } from "react-icons/hi2";
 import { MdEventNote } from "react-icons/md";
 import { RiArticleLine } from "react-icons/ri";
 import Post from "../Post";
+import { addPost, resetPostText, setPostText } from "../../redux/slice/fetchPostReducer";
 const HomeMain = () => {
-  const profile = useSelector((state) => state.fetchProfile.data);
+  const profile = useSelector((state) => state.fetchMyProfile.data);
   const postList = useSelector((state) => state.fetchPost.postList);
+  const post = useSelector((state) => state.fetchPost.post);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const dataToPost = {
+      text: post.text,
+    };
+
+    dispatch(addPost({ dataToPost }));
+    dispatch(resetPostText());
+  };
 
   return (
     <>
-      <Card className="d-flex flex-column py-2 px-3 mb-3">
-        <div>
-          <div className="d-flex">
-            <div>
-              <img
-                src={profile && profile.image}
-                alt="foto profilo"
-                style={{ width: "25px", height: "25px", borderRadius: "50%" }}
-                className="me-2"
-              />
-            </div>
+      <Card className="d-flex flex-column pt-2 pb-1 px-3 mb-3">
+        <div className="py-1">
+          <div className="d-flex align-items-center mb-2">
+            <img
+              src={profile && profile.image}
+              alt="foto profilo"
+              style={{ width: "38px", height: "38px", borderRadius: "50%" }}
+              className="me-2"
+            />
+
             <div className="w-100">
-              <FormControl placeholder="Avvia un post" className="px-3 py-2 rounded-pill w-100" />
+              <Form onSubmit={(event) => handleSubmit(event)}>
+                <FormControl
+                  placeholder="Avvia un post"
+                  value={post && post.text}
+                  className="px-3 py-2 rounded-pill w-100"
+                  onChange={(event) => dispatch(setPostText(event.target.value))}
+                />
+              </Form>
             </div>
           </div>
-          <div className="d-flex justify-content-around my-2">
-            <div className="me-2">
-              <HiPhoto /> <span>Contenuti multimediali</span>
-            </div>
-            <div className="me-2">
-              <MdEventNote />
-              <span>Evento</span>
-            </div>
-            <div className="me-2">
-              <RiArticleLine />
-              <span>Scrivi un articolo</span>
-            </div>
+          <div className="d-flex justify-content-evenly">
+            <Button variant="transparent">
+              <div className="d-flex align-items-center me-2">
+                <HiPhoto className="fs-5 me-1" /> <span>Contenuti multimediali</span>
+              </div>
+            </Button>
+            <Button variant="transparent">
+              <div className="d-flex align-items-center me-2">
+                <MdEventNote className="fs-5 me-1" />
+                <span>Evento</span>
+              </div>
+            </Button>
+            <Button variant="transparent">
+              <div className="d-flex align-items-center me-2">
+                <RiArticleLine className="fs-5 me-1" />
+                <span>Scrivi un articolo</span>
+              </div>
+            </Button>
           </div>
         </div>
       </Card>
       {postList && (
         <Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
-          {postList.map((post) => (
+          {[...postList].reverse().map((post) => (
             <Col key={post._id} xs={12}>
               <Post username={post.username} text={post.text} createdAt={post.createdAt} />
             </Col>

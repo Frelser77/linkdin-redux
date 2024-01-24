@@ -9,7 +9,7 @@ const initialState = {
 
 export const fetchMyProfile = createAsyncThunk("profile/fetchMyProfile", async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/profile/me`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

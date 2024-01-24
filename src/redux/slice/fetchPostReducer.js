@@ -5,6 +5,9 @@ const initialState = {
   postList: null,
   status: "idle",
   error: "",
+  post: {
+    text: "",
+  },
 };
 
 export const fetchAllPosts = createAsyncThunk("profile/fetchAllPosts", async (_, { rejectWithValue }) => {
@@ -26,10 +29,37 @@ export const fetchAllPosts = createAsyncThunk("profile/fetchAllPosts", async (_,
   }
 });
 
+export const addPost = createAsyncThunk("profile/addPost", async ({ dataToPost }, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/`, {
+      method: "POST",
+      body: JSON.stringify(dataToPost),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return rejectWithValue(error.message);
+  }
+});
+
 const fetchPostSlice = createSlice({
   name: "fetchPost",
   initialState,
-  reducers: {},
+  reducers: {
+    setPostText: (state, action) => {
+      state.post.text = action.payload;
+    },
+    resetPostText: (state, action) => {
+      state.post.text = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllPosts.pending, (state) => {
@@ -46,4 +76,5 @@ const fetchPostSlice = createSlice({
   },
 });
 export const selectMyProfileData = (state) => state.fetchPost.postList;
+export const { setPostText, resetPostText } = fetchPostSlice.actions;
 export default fetchPostSlice.reducer;
