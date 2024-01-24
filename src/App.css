@@ -110,3 +110,7 @@ body {
 .border.dropdown:active {
 	border: 3px solid black;
 }
+
+#mini-footer small {
+	font-size: 12px;
+}
