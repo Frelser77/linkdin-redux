@@ -9,15 +9,15 @@ const Home = () => {
 
   return (
     <Row className="my-4">
-      <Col className="col-3of16">
+      <div className="col-3of16 flex-shrink-0">
         <ProfileCardHome />
-      </Col>
-      <Col className="col-9of16">
+      </div>
+      <div className="col-9of16 flex-shrink-0">
         <HomeMain />
-      </Col>
-      <Col className="col-4of16">
+      </div>
+      <div className="col-4of16 flex-shrink-0">
         <HomeAside />
-      </Col>
+      </div>
     </Row>
   );
 };

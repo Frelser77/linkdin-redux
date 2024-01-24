@@ -17,11 +17,15 @@ import EditModal from "./EditModal";
 import FileUploadComponent from "./FileUploadComponent";
 import { fetchExperiences } from "../redux/slice/ExperienceSlice";
 import { formatDate } from "./Experiences";
+import { addMyPost } from "../redux/slice/fetchPostReducer";
 export const logoUrl =
   "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 
 function Profile() {
   const profile = useSelector((state) => state.fetchProfile.data);
+  const myProfile = useSelector((state) => state.fetchMyProfile.data);
+  const myPosts = useSelector((state) => state.fetchPost.myPosts);
+  const allPosts = useSelector((state) => state.fetchPost.postList);
   const dispatch = useDispatch();
   const params = useParams();
   const location = useLocation();
@@ -42,14 +46,16 @@ function Profile() {
     switch (activeSection) {
       case "post":
         return (
-          <Card className="mb-3">
-            <Card.Body className="d-flex align-items-center justify-content-between">
-              <div className="d-flex flex-column">
-                <Card.Title>Titolo del Post</Card.Title>
-                <Card.Text>Questo è il contenuto di un post.</Card.Text>
-              </div>
-            </Card.Body>
-            <Card.Footer>
+          myPosts &&
+          [...myPosts].reverse().map((post) => (
+            <Card className="mb-3">
+              <Card.Body className="d-flex align-items-center justify-content-between">
+                <div className="d-flex flex-column">
+                  <small>{myProfile && myProfile.name + " " + myProfile.surname} ha pubblicato un post • </small>
+                  <Card.Text>{post.text}</Card.Text>
+                </div>
+              </Card.Body>
+              {/* <Card.Footer>
               <Button variant="link" className="text-decoration-none">
                 <FaHeart /> 9
               </Button>
@@ -59,8 +65,9 @@ function Profile() {
               <Button variant="link" className="text-decoration-none">
                 <FaShareSquare /> Condividi
               </Button>
-            </Card.Footer>
-          </Card>
+            </Card.Footer> */}
+            </Card>
+          ))
         );
       case "commenti":
         return (
@@ -112,6 +119,10 @@ function Profile() {
     }
     profile && dispatch(fetchExperiences(profile._id));
   }, [profile]);
+
+  useEffect(() => {
+    allPosts && allPosts.map((post) => post.user._id === myProfile._id && dispatch(addMyPost(post)));
+  }, []);
 
   useEffect(() => {
     let queryParam;
@@ -341,24 +352,26 @@ function Profile() {
               <Button
                 variant={activeSection === "post" ? "success" : "outline-secondary"}
                 onClick={() => setActiveSection("post")}
-                className="me-2"
+                className="me-2 rounded-pill"
               >
                 Post
               </Button>
               <Button
                 variant={activeSection === "commenti" ? "success" : "outline-secondary"}
                 onClick={() => setActiveSection("commenti")}
-                className="me-2"
+                className="me-2 rounded-pill"
               >
                 Commenti
               </Button>
               <Button
                 variant={activeSection === "immagini" ? "success" : "outline-secondary"}
                 onClick={() => setActiveSection("immagini")}
+                className=" rounded-pill"
               >
                 Immagini
               </Button>
             </div>
+            {}
             {renderSectionContent()}
           </Card>
           <Card className="mb-2 shadow">

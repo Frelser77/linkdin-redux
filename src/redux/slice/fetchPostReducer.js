@@ -8,6 +8,7 @@ const initialState = {
   post: {
     text: "",
   },
+  myPosts: [],
 };
 
 export const fetchAllPosts = createAsyncThunk("profile/fetchAllPosts", async (_, { rejectWithValue }) => {
@@ -59,6 +60,11 @@ const fetchPostSlice = createSlice({
     resetPostText: (state, action) => {
       state.post.text = "";
     },
+    addMyPost: (state, action) => {
+      if (!state.myPosts.includes(action.payload)) {
+        state.myPosts.push(action.payload);
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -76,5 +82,5 @@ const fetchPostSlice = createSlice({
   },
 });
 export const selectMyProfileData = (state) => state.fetchPost.postList;
-export const { setPostText, resetPostText } = fetchPostSlice.actions;
+export const { setPostText, resetPostText, addMyPost } = fetchPostSlice.actions;
 export default fetchPostSlice.reducer;

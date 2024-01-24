@@ -45,7 +45,7 @@ const ProfileCardHome = () => {
             </div>
           )}
           <Card.Title className="text-center fs-5 mt-4 mb-0">
-            <Link style={{ textDecoration: "none", color: "black" }}>
+            <Link to={"/profile/me"} style={{ textDecoration: "none", color: "black" }}>
               {profile && profile.name + " " + profile.surname}
             </Link>
           </Card.Title>

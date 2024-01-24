@@ -4,7 +4,8 @@ import { HiPhoto } from "react-icons/hi2";
 import { MdEventNote } from "react-icons/md";
 import { RiArticleLine } from "react-icons/ri";
 import Post from "../Post";
-import { addPost, resetPostText, setPostText } from "../../redux/slice/fetchPostReducer";
+import { addMyPost, addPost, fetchAllPosts, resetPostText, setPostText } from "../../redux/slice/fetchPostReducer";
+import { useEffect } from "react";
 const HomeMain = () => {
   const profile = useSelector((state) => state.fetchMyProfile.data);
   const postList = useSelector((state) => state.fetchPost.postList);
@@ -19,6 +20,7 @@ const HomeMain = () => {
     };
 
     dispatch(addPost({ dataToPost }));
+    dispatch(addMyPost(dataToPost));
     dispatch(resetPostText());
   };
 
@@ -70,7 +72,7 @@ const HomeMain = () => {
         <Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
           {[...postList].reverse().map((post) => (
             <Col key={post._id} xs={12}>
-              <Post username={post.username} text={post.text} createdAt={post.createdAt} />
+              <Post username={post.username} text={post.text} createdAt={post.createdAt} user={post.user._id} />
             </Col>
           ))}
         </Row>
