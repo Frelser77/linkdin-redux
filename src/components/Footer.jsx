@@ -4,7 +4,7 @@ import { FaQuestionCircle, FaCog, FaBalanceScale } from "react-icons/fa";
 
 const Footer = () => {
 	return (
-		<footer className="footer mt-auto py-3 bg-light">
+		<footer className="footer mt-auto py-3 ">
 			<Container>
 				<Row className="justify-content-between">
 					<Col>
