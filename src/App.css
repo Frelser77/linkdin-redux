@@ -56,3 +56,55 @@ body {
 .nav-link.my-link:hover {
 	background-color: #ebebeb;
 }
+
+/* DROPDWON LINGUE FOOTER */
+.tab-container {
+	display: flex;
+	gap: 15px;
+}
+
+.tab {
+	cursor: pointer;
+	padding: 10px;
+	color: grey;
+	border-bottom: 3px solid transparent;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.tab:hover {
+	background-color: rgba(128, 128, 128, 0.13);
+}
+
+.tab.active {
+	color: green;
+	border-bottom-color: green;
+}
+
+.langDrop {
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.dropHover:hover {
+	background-color: #0d6efd;
+	color: white;
+}
+
+.btn.show {
+	border: none;
+	border-color: transparent;
+	background-color: transparent;
+}
+
+#dropdown-basic.btn {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.border.dropdown:hover {
+	border: 3px solid black;
+}
+
+.border.dropdown:active {
+	border: 3px solid black;
+}

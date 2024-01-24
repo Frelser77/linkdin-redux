@@ -11,13 +11,16 @@ import { MdOutlineEmail } from "react-icons/md";
 import { ImCalendar } from "react-icons/im";
 import { ArrowRight, Linkedin } from "react-bootstrap-icons";
 import { editProfile, setEditProfile } from "../redux/slice/editProfileReducer";
-import { MySvg } from "./iconCircle";
 import { useNavigate } from "react-router-dom";
 import ExpModal from "./ExpModal";
 import EditModal from "./EditModal";
 import FileUploadComponent from "./FileUploadComponent";
 import { fetchExperiences, selectAllExperiencesData } from "../redux/slice/ExperienceSlice";
 import { formatDate } from "./Experiences";
+import SkillsCard from "./profile/interestsCard";
+import InterestsCard from "./profile/interestsCard";
+export const logoUrl =
+	"https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 
 function Profile() {
 	const profile = useSelector((state) => state.fetchProfile.data);
@@ -33,8 +36,6 @@ function Profile() {
 	const [showAlert, setShowAlert] = useState(false);
 	const [dataToEdit, setDataToEdit] = useState({ ...profile });
 	const [activeSection, setActiveSection] = useState("post");
-	const logoUrl =
-		"https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 	const navigate = useNavigate();
 
 	const experiences = useSelector(selectAllExperiencesData);
@@ -461,6 +462,7 @@ function Profile() {
 							</NavLink>
 						</Button>
 					</Card>
+					<InterestsCard />
 				</Col>
 				{/* SIDE BAR */}
 				<Col md={3} className="d-none d-md-block ">
