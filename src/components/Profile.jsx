@@ -91,7 +91,7 @@ function Profile() {
       dispatch(setEditProfile(profile));
     }
     profile && dispatch(fetchExperiences(profile._id));
-  }, [profile]);
+  }, [dispatch, location.pathname, profile]);
 
   useEffect(() => {
     if (allPosts && myProfile && profile) {

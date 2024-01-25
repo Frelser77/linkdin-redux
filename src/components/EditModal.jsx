@@ -10,7 +10,7 @@ const EditModal = ({
   statusPut,
 }) => {
   return (
-    <Modal show={showSecond} onHide={handleCloseSecond} dialogClassName="editProfileModal">
+    <Modal show={showSecond} onHide={handleCloseSecond} dialogClassName="editProfileModal" className="modal-index">
       <Modal.Header closeButton>
         <Modal.Title>Modifica di presentazione</Modal.Title>
       </Modal.Header>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 
-const SingleJob = ({ job }) => {
+const SingleJob = ({ job, selectJob }) => {
   const [isClosed, setisClosed] = useState(false);
 
   const handleClose = () => {
@@ -12,7 +12,9 @@ const SingleJob = ({ job }) => {
     !isClosed && (
       <Card className="mb-3">
         <Card.Body>
-          <Card.Link style={{ textDecoration: "none", cursor: "pointer" }}>{job.title}</Card.Link>
+          <Card.Link style={{ textDecoration: "none", cursor: "pointer" }} onClick={() => selectJob(job)}>
+            {job.title}
+          </Card.Link>
           <Card.Subtitle className="mb-2 text-muted">{job.company_name}</Card.Subtitle>
           <Card.Text>{job.category}</Card.Text>
           <Card.Text className="text-muted">

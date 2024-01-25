@@ -52,7 +52,7 @@ function NavBar() {
       <Navbar
         expand="lg"
         className="bg-white py-0 justify-content-center sticky-top shadow-sm"
-        style={{ backgroundColor: "white", border: "gainsboro 1px solid", zIndex: "10000" }}
+        style={{ backgroundColor: "white", border: "gainsboro 1px solid" }}
         data-bs-theme="light"
       >
         <Container className="py-0">

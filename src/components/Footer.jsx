@@ -7,7 +7,8 @@ const Footer = () => {
   const location = useLocation();
 
   return (
-    location.pathname !== "/" && (
+    location.pathname !== "/" ||
+    (location.pathname !== "/jobs" && (
       <footer className="footer mt-auto py-3">
         <Container>
           <Row className="justify-content-between">
@@ -110,7 +111,7 @@ const Footer = () => {
           </Row>
         </Container>
       </footer>
-    )
+    ))
   );
 };
 

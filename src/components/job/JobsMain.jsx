@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../../redux/slice/fetchJobsReducers";
 import { useParams } from "react-router-dom";
 import { IoCloseCircle } from "react-icons/io5";
+import MiniFooter from "../home/MiniFooter";
 
-const JobsMain = () => {
+const JobsMain = ({ selectJob, selectedJob }) => {
   const [isWindowVisible, setWindowVisibility] = useState(true);
 
   const toggleWindowVisibility = () => {
@@ -23,7 +24,6 @@ const JobsMain = () => {
   useEffect(() => {
     if (params.query !== "") {
       setSearchQuery(params.query);
-      console.log(searchQuery);
       dispatch(fetchJobs(searchQuery));
     } else {
       dispatch(fetchJobs());
@@ -39,7 +39,7 @@ const JobsMain = () => {
       <Row>
         <Col xs={12}>
           {jobs && jobs.length > 0
-            ? jobs.map((job) => <SingleJob key={job._id} job={job} />)
+            ? jobs.map((job) => <SingleJob key={job._id} job={job} selectJob={selectJob} selectedJob={selectedJob} />)
             : (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
         </Col>
       </Row>
@@ -67,6 +67,7 @@ const JobsMain = () => {
           </div>
         </Card>
       )}
+      {selectedJob && <MiniFooter />}
     </>
   );
 };

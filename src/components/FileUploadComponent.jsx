@@ -7,6 +7,7 @@ const FileUploadComponent = ({ showUpload, handleCloseUpload, userId }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.fileUpload.loading);
   const error = useSelector((state) => state.fileUpload.error);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -17,15 +18,27 @@ const FileUploadComponent = ({ showUpload, handleCloseUpload, userId }) => {
   const handleUpload = () => {
     if (selectedFile) {
       dispatch(uploadFile({ file: selectedFile, type: "profile", id: userId }));
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        handleCloseUpload();
+      }, 1500);
     }
   };
 
   return (
-    <Modal show={showUpload} onHide={handleCloseUpload} dialogClassName="uploadPictureModal">
+    <Modal
+      show={showUpload}
+      onHide={handleCloseUpload}
+      dialogClassName="uploadPictureModal"
+      className="mt-5 modal-index"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Modifica la tua immagine di profilo</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {showAlert && error && <Alert variant="danger">Error: {error}</Alert>}
+        {showAlert && !error && !loading && <Alert variant="success">Immagine caricata con successo!</Alert>}
         <Form>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Choose a file</Form.Label>
@@ -37,9 +50,7 @@ const FileUploadComponent = ({ showUpload, handleCloseUpload, userId }) => {
           </Button>
         </Form>
 
-        {loading && <ProgressBar animated now={100} label="Uploading..." />}
-
-        {error && <Alert variant="danger">Error: {error}</Alert>}
+        {loading && <ProgressBar animated now={100} label="Uploading..." className="mt-3" />}
       </Modal.Body>
     </Modal>
   );
