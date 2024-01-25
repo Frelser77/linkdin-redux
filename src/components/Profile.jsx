@@ -31,6 +31,8 @@ import FileUploadComponent from "./FileUploadComponent";
 import { fetchExperiences } from "../redux/slice/ExperienceSlice";
 import { formatDate } from "./Experiences";
 import { addMyPost } from "../redux/slice/fetchPostReducer";
+import { FaTrashCan } from "react-icons/fa6";
+import RenderSectionContent from "./profile/RenderSectionContent";
 export const logoUrl =
   "https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 
@@ -54,51 +56,6 @@ function Profile() {
   const navigate = useNavigate();
 
   const experiences = useSelector((state) => state.fetchExperiences.items);
-
-  const renderSectionContent = () => {
-    switch (activeSection) {
-      case "post":
-        return location.pathname === "/profile/me"
-          ? myPosts && (
-              <div style={{ maxHeight: "500px", overflowY: "auto" }}>
-                {[...myPosts].reverse().map((post) => (
-                  <Card className="mb-3">
-                    <Card.Body className="d-flex align-items-center justify-content-between">
-                      <div className="d-flex flex-column">
-                        <small>{myProfile && myProfile.name + " " + myProfile.surname} ha pubblicato un post • </small>
-                        <Card.Text>{post.text}</Card.Text>
-                      </div>
-                    </Card.Body>
-                    {/* <Card.Footer>
-              <Button variant="link" className="text-decoration-none">
-			  <FaHeart /> 9
-              </Button>
-              <Button variant="link" className="text-decoration-none">
-			  <FaRegCommentDots /> 2 commenti
-              </Button>
-              <Button variant="link" className="text-decoration-none">
-			  <FaShareSquare /> Condividi
-              </Button>
-            </Card.Footer> */}
-                  </Card>
-                ))}
-              </div>
-            )
-          : "";
-      case "commenti":
-        return (
-          // Contenuto della sezione Commenti
-          "NO COMMENT"
-        );
-      case "immagini":
-        return (
-          // Contenuto della sezione Immagini
-          "NO IMAGE"
-        );
-      default:
-        return null;
-    }
-  };
 
   const handleShowExpDetails = () => {
     const userId = profile._id;
@@ -136,12 +93,6 @@ function Profile() {
     profile && dispatch(fetchExperiences(profile._id));
   }, [profile]);
 
-  /*//////////////////////////////////////// ALFONSO /////////////////////////////////////////////////////////////*/
-  // useEffect(() => {
-  //   allPosts && allPosts.map((post) => post.user._id === myProfile._id && dispatch(addMyPost(post)));
-  // }, []);
-
-  //////////////////////////////////////// SALVATORE /////////////////////////////////////////////////////////////
   useEffect(() => {
     if (allPosts && myProfile && profile) {
       setDataToEdit({ ...profile });
@@ -154,7 +105,7 @@ function Profile() {
         }
       });
     }
-  }, [allPosts, myProfile, dispatch]);
+  }, [allPosts, myProfile, dispatch, profile, myPosts]);
 
   useEffect(() => {
     let queryParam;
@@ -476,7 +427,7 @@ function Profile() {
               </Button>
             </div>
             {}
-            {renderSectionContent()}
+            <RenderSectionContent myPosts={myPosts} myProfile={myProfile} activeSection={activeSection} />
           </Card>
           <Card className="mb-2 shadow">
             <Card.Title className="fs-4 d-flex justify-content-between align-items-center p-2 mx-2 my-1">

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { token } from "../../token";
 
 export const uploadFile = createAsyncThunk("fileUpload/uploadFile", async ({ file, type, id, expId }) => {
+  console.log(file, type, id, expId);
   let URL;
   switch (type) {
     case "profile":
@@ -16,10 +17,13 @@ export const uploadFile = createAsyncThunk("fileUpload/uploadFile", async ({ fil
     default:
       throw new Error("Invalid upload type");
   }
+  console.log(URL);
 
   try {
     const formData = new FormData();
-    formData.append("image", file); // 'image' è il nome del campo nel form data
+    formData.append(type, file); // 'image' è il nome del campo nel form data
+
+    console.log("formData: ", formData);
 
     const response = await fetch(URL, {
       method: "POST",

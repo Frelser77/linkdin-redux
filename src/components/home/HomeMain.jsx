@@ -20,7 +20,7 @@ const HomeMain = () => {
     };
 
     dispatch(addPost({ dataToPost }));
-    dispatch(addMyPost(dataToPost));
+    // dispatch(addMyPost(dataToPost));
     dispatch(resetPostText());
   };
 
@@ -72,7 +72,13 @@ const HomeMain = () => {
         <Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
           {[...postList].reverse().map((post) => (
             <Col key={post._id} xs={12}>
-              <Post username={post.username} text={post.text} createdAt={post.createdAt} user={post.user._id} />
+              <Post
+                username={post.username}
+                text={post.text}
+                createdAt={post.createdAt}
+                user={post.user._id}
+                postImg={post.image && post.image}
+              />
             </Col>
           ))}
         </Row>

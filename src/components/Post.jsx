@@ -1,11 +1,11 @@
-import { Card, CardBody, CardHeader } from "react-bootstrap";
+import { Card, CardBody, CardHeader, Image } from "react-bootstrap";
 import { it } from "date-fns/locale";
 import { formatDistanceToNow } from "date-fns";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Post = ({ username, text, createdAt, user }) => {
+const Post = ({ username, text, createdAt, user, postImg }) => {
   const timeSinceCreated = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: it });
   let isItMyProfile = false;
   const myProfile = useSelector((state) => state.fetchMyProfile.data);
@@ -34,7 +34,8 @@ const Post = ({ username, text, createdAt, user }) => {
         </div>
       </CardHeader>
       <CardBody>
-        <p className="mb-0">{text}</p>
+        <p className="mb-2">{text}</p>
+        {postImg && <Image src={postImg} className="w-100" />}
       </CardBody>
     </Card>
   );
