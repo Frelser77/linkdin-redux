@@ -13,7 +13,7 @@ const JobsMain = () => {
   };
 
   const dispatch = useDispatch();
-  const jobs = useSelector((state) => state.jobs.entities.data);
+  const jobs = useSelector((state) => state.jobs.entities);
   const loading = useSelector((state) => state.jobs.loading);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const JobsMain = () => {
       )}
       <Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
         <Col xs={12}>
-          {Array.isArray(jobs)
+          {jobs && jobs.length > 0
             ? jobs.map((job) => <SingleJob key={job._id} job={job} />)
             : (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
         </Col>

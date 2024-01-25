@@ -13,7 +13,7 @@ export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async (searchQuery, 
     }
 
     const data = await response.json();
-    return data;
+    return data.data;
   } catch (error) {
     return rejectWithValue(error.message);
   }
