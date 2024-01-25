@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 
 const MiniFooter = () => {
   return (
-    <div id="mini-footer" className="d-flex flex-column myStickyStacky">
+    <div id="mini-footer" className="d-flex flex-column">
       <div className="d-flex flex-wrap justify-content-center" style={{ color: "gray" }}>
         <small className="mx-1 my-1">Informazioni</small>
         <small className="mx-1 my-1">Accessibilità</small>

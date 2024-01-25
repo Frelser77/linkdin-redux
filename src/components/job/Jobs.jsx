@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import JobsMain from "./JobsMain";
 import JobsAside from "./JobsAside";
-import MiniFooter from "./MiniFooter";
+import MiniFooter from "../home/MiniFooter";
 // import { useDispatch } from "react-redux";
 
 const Jobs = () => {
@@ -12,10 +12,10 @@ const Jobs = () => {
       <Col xs={3} className="flex-shrink-0">
         <JobsAside />
       </Col>
-      <Col xs={5} className="flex-shrink-0">
+      <Col xs={6} className="flex-shrink-0">
         <JobsMain />
       </Col>
-      <Col xs={4} className="flex-shrink-0">
+      <Col xs={3} className="flex-shrink-0">
         <MiniFooter />
       </Col>
     </Row>

@@ -4,6 +4,8 @@ import SingleJob from "./SingleJob";
 import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../../redux/slice/fetchJobsReducers";
+import { useParams } from "react-router-dom";
+import { IoCloseCircle } from "react-icons/io5";
 
 const JobsMain = () => {
   const [isWindowVisible, setWindowVisibility] = useState(true);
@@ -15,10 +17,18 @@ const JobsMain = () => {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs.entities);
   const loading = useSelector((state) => state.jobs.loading);
+  const params = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    dispatch(fetchJobs());
-  }, [dispatch]);
+    if (params.query !== "") {
+      setSearchQuery(params.query);
+      console.log(searchQuery);
+      dispatch(fetchJobs(searchQuery));
+    } else {
+      dispatch(fetchJobs());
+    }
+  }, [dispatch, params.query, searchQuery]);
 
   if (loading === "pending") {
     return <div>Loading...</div>;
@@ -26,18 +36,19 @@ const JobsMain = () => {
 
   return (
     <>
-      {" "}
+      <Row>
+        <Col xs={12}>
+          {jobs && jobs.length > 0
+            ? jobs.map((job) => <SingleJob key={job._id} job={job} />)
+            : (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
+        </Col>
+      </Row>
       {isWindowVisible && (
-        <Card className="d-flex flex-column pt-2 pb-1 px-3 mb-3">
+        <Card className="d-flex flex-column border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2 pb-1 px-3 my-3">
           <div className="d-flex justify-content-between align-items-center py-1">
-            <h4>Ricerche di offerte di lavoro suggerite:</h4>
-            <Button
-              variant="light"
-              className="rounded-circle "
-              style={{ backgroundColor: "gainsboro" }}
-              onClick={toggleWindowVisibility}
-            >
-              {isWindowVisible ? "X" : "Mostra"}
+            <h4 className="mb-0">Ricerche di offerte di lavoro suggerite:</h4>
+            <Button variant="transparent" onClick={toggleWindowVisibility}>
+              {isWindowVisible ? <IoCloseCircle className="fs-5" /> : "Mostra"}
             </Button>
           </div>
           <div className="py-1">
@@ -56,13 +67,6 @@ const JobsMain = () => {
           </div>
         </Card>
       )}
-      <Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
-        <Col xs={12}>
-          {jobs && jobs.length > 0
-            ? jobs.map((job) => <SingleJob key={job._id} job={job} />)
-            : (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
-        </Col>
-      </Row>
     </>
   );
 };
