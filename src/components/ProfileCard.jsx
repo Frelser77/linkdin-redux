@@ -3,7 +3,7 @@ import { PiPaperPlaneTiltDuotone } from "react-icons/pi";
 
 const ProfileCard = ({ profile }) => {
 	return (
-		<div className="d-flex align-items-start mb-2 border border-1 border-secondary border-top-0 border-end-0 border-start-0 pt-2 pb-3">
+		<div className="d-flex align-items-start mb-2 border border-1 border-secondary border-top-0 border-end-0 border-start-0 pb-3">
 			<NavLink to={`/profile/${profile._id}`}>
 				<img
 					src={profile && profile.image}

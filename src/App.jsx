@@ -16,33 +16,33 @@ import { fetchAllPosts } from "./redux/slice/fetchPostReducer";
 import { fetchMyProfile } from "./redux/slice/fetchMyProfileReducer";
 
 function App() {
-  const dispatch = useDispatch();
-  //   const profiles = useSelector((state) => state.fetchAllProfiles.data);
+	const dispatch = useDispatch();
+	//   const profiles = useSelector((state) => state.fetchAllProfiles.data);
 
-  useEffect(() => {
-    dispatch(fetchAllProfiles());
-    dispatch(fetchAllPosts());
-    dispatch(fetchMyProfile());
-  }, []);
+	useEffect(() => {
+		dispatch(fetchAllProfiles());
+		dispatch(fetchAllPosts());
+		dispatch(fetchMyProfile());
+	}, []);
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <NavBar />
-        <Container>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<AllProfiles />} />
-            <Route path="/profile/me" element={<Profile />} />
-            <Route path="/profile/:userId" element={<Profile />} />
-            <Route path="/profile/:userId/experiences" element={<Experiences />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Container>
-        <Footer />
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<NavBar />
+				<Container>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/profile" element={<AllProfiles />} />
+						<Route path="/profile/me" element={<Profile />} />
+						<Route path="/profile/:userId" element={<Profile />} />
+						<Route path="/profile/:userId/experiences" element={<Experiences />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</Container>
+				<Footer />
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
