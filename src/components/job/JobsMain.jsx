@@ -58,11 +58,9 @@ const JobsMain = () => {
 			)}
 			<Row className="border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2">
 				<Col xs={12}>
-					{Array.isArray(jobs) ? (
-						jobs.map((job) => <SingleJob key={job._id} job={job} />)
-					) : (
-						<div>Nessun lavoro trovato</div>
-					)}
+					{Array.isArray(jobs)
+						? jobs.map((job) => <SingleJob key={job._id} job={job} />)
+						: (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
 				</Col>
 			</Row>
 		</>

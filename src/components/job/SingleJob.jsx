@@ -12,7 +12,7 @@ const SingleJob = ({ job }) => {
 					</div>
 					<div className="d-flex flex-column">
 						{/* <Link to={"#"} className="mb-0" style={{ textDecoration: "none", color: "black" }}> */}
-						{job.company_name} {/* </Link> */}
+						{job.company_name && job.company_name} {/* </Link> */}
 						<small className="text-muted">{new Date(job.publication_date).toLocaleDateString()}</small>
 					</div>
 				</div>
@@ -24,9 +24,9 @@ const SingleJob = ({ job }) => {
 				<div className="d-flex justify-content-between align-items-baseline w-100">
 					<small className="text-muted">{job.candidate_required_location}</small>
 					<Button variant="info" className="ms-2">
-						#categoria
+						{job.category && job.category}
 					</Button>
-					<Card.Link href={job.url} target="_blank" className="ms-2">
+					<Card.Link href={job.url && job.url} target="_blank" className="ms-2">
 						Job Link
 					</Card.Link>
 				</div>

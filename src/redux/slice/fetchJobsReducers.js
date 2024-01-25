@@ -4,8 +4,8 @@ export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async (searchQuery, 
 	try {
 		const response = await fetch(
 			searchQuery
-				? `https://strive-benchmark.herokuapp.com/api/jobs?search=${searchQuery}`
-				: "https://strive-benchmark.herokuapp.com/api/jobs"
+				? `https://strive-benchmark.herokuapp.com/api/jobs?limit=20&search=${searchQuery}`
+				: "https://strive-benchmark.herokuapp.com/api/jobs?limit=20"
 		);
 
 		if (!response.ok) {
