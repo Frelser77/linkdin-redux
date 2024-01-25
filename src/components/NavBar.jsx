@@ -129,7 +129,7 @@ function NavBar() {
                   </p>
                 </div>
               </NavLink>
-              <div className="py-2 ms-3 pb-0 text-center">
+              <div className="py-2 me-3 pb-0 text-center">
                 <NavLink to={"/profile/me"}>
                   <img
                     src={profile && profile.image}
