@@ -20,11 +20,13 @@ const JobsMain = ({ selectJob, selectedJob }) => {
   const loading = useSelector((state) => state.jobs.loading);
   const params = useParams();
   const [searchQuery, setSearchQuery] = useState("");
+  let n;
 
   useEffect(() => {
     if (params.query !== "") {
       setSearchQuery(params.query);
-      dispatch(fetchJobs(searchQuery));
+
+      dispatch(fetchJobs({ searchQuery }));
     } else {
       dispatch(fetchJobs());
     }
@@ -42,6 +44,59 @@ const JobsMain = ({ selectJob, selectedJob }) => {
             ? jobs.map((job) => <SingleJob key={job._id} job={job} selectJob={selectJob} selectedJob={selectedJob} />)
             : (console.log(jobs), (<div>Nessun lavoro trovato</div>))}
         </Col>
+        <div className="d-flex w-100 justify-content-center">
+          <div className="d-flex">
+            <Button
+              variant="transparent"
+              className="btn btn-outline-secondary rounded-circle active me-2"
+              onClick={() => {
+                dispatch(fetchJobs({ searchQuery }));
+              }}
+            >
+              1
+            </Button>
+            <Button
+              variant="transparent"
+              className="btn btn-outline-secondary rounded-circle inactive me-2"
+              onClick={() => {
+                n = 2;
+                dispatch(fetchJobs({ searchQuery, n }));
+              }}
+            >
+              2
+            </Button>
+            <Button
+              variant="transparent"
+              className="btn btn-outline-secondary rounded-circle me-2"
+              onClick={() => {
+                n = 3;
+                dispatch(fetchJobs({ searchQuery, n }));
+              }}
+            >
+              3
+            </Button>
+            <Button
+              variant="transparent"
+              className="btn btn-outline-secondary rounded-circle me-2"
+              onClick={() => {
+                n = 4;
+                dispatch(fetchJobs({ searchQuery, n }));
+              }}
+            >
+              4
+            </Button>
+            <Button
+              variant="transparent"
+              className="btn btn-outline-secondary rounded-circle"
+              onClick={() => {
+                n = 5;
+                dispatch(fetchJobs({ searchQuery, n }));
+              }}
+            >
+              5
+            </Button>
+          </div>
+        </div>
       </Row>
       {isWindowVisible && (
         <Card className="d-flex flex-column border border-1 border-light-secondary border-end-0 border-bottom-0 border-start-0 pt-2 pb-1 px-3 my-3">

@@ -263,3 +263,31 @@ body {
   height: calc(100vh - 120px);
   overflow-y: scroll;
 }
+
+/* Stili per WebKit (Chrome, Safari, ecc.) */
+::-webkit-scrollbar {
+  width: 8px; /* o qualsiasi larghezza desiderata */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* colore di sfondo della traccia della scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* colore della barra di scorrimento */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* colore della barra di scorrimento quando si passa il mouse sopra */
+}
+
+/* Stili per Firefox */
+* {
+  scrollbar-width: thin; /* "auto" o "thin" */
+  scrollbar-color: #888 #f1f1f1; /* colore della barra di scorrimento e colore di sfondo della traccia della scrollbar */
+}
+
+/* Stili per Internet Explorer */
+body {
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* opzioni autohiding per le scrollbar */
+}

@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async (searchQuery, { rejectWithValue }) => {
+export const fetchJobs = createAsyncThunk("jobs/fetchJobs", async ({ searchQuery, n = 1 }, { rejectWithValue }) => {
   try {
     const response = await fetch(
       searchQuery
-        ? `https://strive-benchmark.herokuapp.com/api/jobs?limit=20&search=${searchQuery}`
-        : "https://strive-benchmark.herokuapp.com/api/jobs?limit=20"
+        ? `https://strive-benchmark.herokuapp.com/api/jobs?limit=${20 * n}&offset=${20 * (n - 1)}&search=${searchQuery}`
+        : `https://strive-benchmark.herokuapp.com/api/jobs?limit=${20 * n}&offset=${20 * (n - 1)}`
     );
 
     if (!response.ok) {
