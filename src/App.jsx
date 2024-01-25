@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Home from "./components/home/Home";
 import { fetchAllPosts } from "./redux/slice/fetchPostReducer";
 import { fetchMyProfile } from "./redux/slice/fetchMyProfileReducer";
+import Jobs from "./components/job/Jobs";
 
 function App() {
 	const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
 						<Route path="/profile/me" element={<Profile />} />
 						<Route path="/profile/:userId" element={<Profile />} />
 						<Route path="/profile/:userId/experiences" element={<Experiences />} />
+						<Route path="/jobs" element={<Jobs />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Container>

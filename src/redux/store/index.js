@@ -6,19 +6,21 @@ import ExperienceSlice from "../slice/ExperienceSlice";
 import fileUploadReducer from "../slice/fileUploadReducer";
 import fetchPostReducer from "../slice/fetchPostReducer";
 import fetchMyProfileReducer from "../slice/fetchMyProfileReducer";
+import fetchJobsReducers from "../slice/fetchJobsReducers";
 
 const rootReducer = combineReducers({
-  fetchProfile: fetchProfileReducer,
-  fetchAllProfiles: fetchAllProfilesReducers,
-  editProfile: editProfileReducer,
-  fetchExperiences: ExperienceSlice,
-  fileUpload: fileUploadReducer,
-  fetchMyProfile: fetchMyProfileReducer,
-  fetchPost: fetchPostReducer,
+	fetchProfile: fetchProfileReducer,
+	fetchAllProfiles: fetchAllProfilesReducers,
+	editProfile: editProfileReducer,
+	fetchExperiences: ExperienceSlice,
+	fileUpload: fileUploadReducer,
+	fetchMyProfile: fetchMyProfileReducer,
+	fetchPost: fetchPostReducer,
+	jobs: fetchJobsReducers,
 });
 
 export const store = configureStore({
-  reducer: rootReducer,
+	reducer: rootReducer,
 });
 
 export default store;

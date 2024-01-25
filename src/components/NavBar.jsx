@@ -15,18 +15,24 @@ import {
 	Search,
 } from "react-bootstrap-icons";
 import InputGroup from "react-bootstrap/InputGroup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Offcanvas, Row } from "react-bootstrap";
 import { GoGraph, GoOrganization, GoBroadcast, GoNote, GoChecklist, GoPerson } from "react-icons/go";
+import { fetchJobs } from "../redux/slice/fetchJobsReducers";
 
 function NavBar() {
 	const [showSubNavbar, setShowSubNavbar] = useState(false);
 	const location = useLocation();
 	const profile = useSelector((state) => state.fetchMyProfile.data);
 	const [show, setShow] = useState(false);
+	const dispatch = useDispatch();
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+	const handleSearch = (searchQuery) => {
+		dispatch(fetchJobs(searchQuery));
+	};
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -44,7 +50,7 @@ function NavBar() {
 			<Navbar
 				expand="lg"
 				className="bg-white py-0 justify-content-center sticky-top shadow-sm"
-				style={{ backgroundColor: "white", border: "gainsboro 1px solid" }}
+				style={{ backgroundColor: "white", border: "gainsboro 1px solid", zIndex: "10000" }}
 				data-bs-theme="light"
 			>
 				<Container className="py-0">
@@ -96,10 +102,12 @@ function NavBar() {
 							</NavLink>
 							<NavLink className="undecorated">
 								<div className="my-1 mx-3 text-center">
-									<BriefcaseFill className="mx-2" style={{ fontSize: "1.3rem" }} />
-									<p className="mb-0" style={{ fontSize: "0.75rem" }}>
-										Lavoro
-									</p>
+									<NavLink to={"/jobs"} className="btn" onClick={() => handleSearch()}>
+										<BriefcaseFill className="mx-2" style={{ fontSize: "1.3rem" }} />
+										<p className="mb-0" style={{ fontSize: "0.75rem" }}>
+											Lavoro
+										</p>
+									</NavLink>
 								</div>
 							</NavLink>
 							<NavLink className="undecorated">
