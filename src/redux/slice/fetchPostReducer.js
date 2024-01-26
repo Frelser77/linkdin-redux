@@ -13,7 +13,7 @@ const initialState = {
 
 export const fetchAllPosts = createAsyncThunk("profile/fetchAllPosts", async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts?limit=50`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
