@@ -50,7 +50,7 @@ body {
 
 .sub-navbar {
 	position: sticky;
-	top: 68px;
+	top: 64px;
 	background-color: rgba(247, 247, 247, 1);
 	transition: transform 0.5s ease-in-out;
 	border-top: 1px solid gray;
