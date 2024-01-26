@@ -33,7 +33,7 @@ const AllProfiles = () => {
 	return (
 		<>
 			<h2 className="mt-4 mb-3 fs-1">Profili consigliati</h2>
-			<Row xs={2} sm={3} md={4} className="my-3">
+			<Row xs={1} sm={2} md={3} lg={4} className="my-3">
 				{profiles &&
 					profiles.map((profile) => (
 						<Col key={"profile" + profile._id} className="my-2">

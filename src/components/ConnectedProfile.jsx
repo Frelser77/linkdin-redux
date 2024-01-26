@@ -29,7 +29,7 @@ const ConnectedProfile = () => {
 	const connectedProfiles = profiles?.filter((profile) => connectedProfileIds.includes(profile._id));
 	return (
 		<Container>
-			<Row className="my-4">
+			<Row className="my-4" xs={4}>
 				{connectedProfiles.length > 0 ? (
 					connectedProfiles.map((profile) => (
 						<ProfileCard

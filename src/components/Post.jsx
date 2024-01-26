@@ -4,8 +4,8 @@ import { formatDistanceToNow } from "date-fns";
 import { FaHeart, FaRegCommentDots, FaShareSquare, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, deleteComment, fetchAllComments, updateComment } from "../redux/slice/fetchCommentsReducer";
-import { useState } from "react";
+import { addComment } from "../redux/slice/fetchCommentsReducer";
+import { useEffect, useState } from "react";
 import Comment from "./Comment";
 
 const Post = ({ username, text, createdAt, user, postImg, allComments, postId, likes, numberOfComments }) => {
@@ -18,11 +18,9 @@ const Post = ({ username, text, createdAt, user, postImg, allComments, postId, l
 	const [comments, setComments] = useState([]);
 	const [commentText, setCommentText] = useState("");
 
-	const toggleComments = () => {
-		allComments && setComments(allComments.filter((comment) => comment.elementId === postId));
-
-		setShowComments(!showComments);
-	};
+	useEffect(() => {
+		setComments(allComments.filter((comment) => comment.elementId === postId));
+	}, [allComments, postId]);
 
 	if (myProfile && user === myProfile._id) {
 		isItMyProfile = true;
@@ -60,7 +58,7 @@ const Post = ({ username, text, createdAt, user, postImg, allComments, postId, l
 				<Button
 					variant="link"
 					className="d-flex align-items-center text-decoration-none text-secondary"
-					onClick={() => toggleComments()}
+					onClick={() => setShowComments(!showComments)}
 				>
 					<FaRegCommentDots className="me-1 mb-0 " /> {comments.length} commenti
 				</Button>

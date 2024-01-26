@@ -50,7 +50,7 @@ body {
 
 .sub-navbar {
 	position: sticky;
-	top: 65px;
+	top: 68px;
 	background-color: rgba(247, 247, 247, 1);
 	transition: transform 0.5s ease-in-out;
 	border-top: 1px solid gray;
@@ -154,68 +154,136 @@ body {
 #mini-footer small {
 	font-size: 12px;
 }
-
-.col-1of16 {
-	width: 6.25%;
+.col-1of20 {
+	flex: 0 0 auto;
+	width: 5%;
 }
 
-.col-2of16 {
-	width: 12.5%;
+.col-2of20 {
+	flex: 0 0 auto;
+	width: 10%;
 }
 
-.col-3of16 {
-	width: 18.75%;
+.col-3of20 {
+	flex: 0 0 auto;
+	width: 15%;
 }
 
-.col-4of16 {
+.col-4of20 {
+	flex: 0 0 auto;
+	width: 20%;
+}
+
+.col-5of20 {
+	flex: 0 0 auto;
 	width: 25%;
 }
 
-.col-5of16 {
-	width: 31.25%;
+.col-6of20 {
+	flex: 0 0 auto;
+	width: 30%;
 }
 
-.col-6of16 {
-	width: 37.5%;
+.col-7of20 {
+	flex: 0 0 auto;
+	width: 35%;
 }
 
-.col-7of16 {
-	width: 43.75%;
+.col-8of20 {
+	flex: 0 0 auto;
+	width: 40%;
 }
-.col-8of16 {
+
+.col-9of20 {
+	flex: 0 0 auto;
+	width: 45%;
+}
+
+.col-10of20 {
+	flex: 0 0 auto;
 	width: 50%;
 }
 
-.col-9of16 {
-	width: 56.25%;
+.col-11of20 {
+	flex: 0 0 auto;
+	width: 55%;
 }
 
-.col-10of16 {
-	width: 62.5%;
+.col-12of20 {
+	flex: 0 0 auto;
+	width: 60%;
 }
 
-.col-11of16 {
-	width: 68.75%;
+.col-13of20 {
+	flex: 0 0 auto;
+	width: 65%;
 }
 
-.col-12of16 {
+.col-14of20 {
+	flex: 0 0 auto;
+	width: 70%;
+}
+
+.col-15of20 {
+	flex: 0 0 auto;
 	width: 75%;
 }
 
-.col-13of16 {
-	width: 81.25%;
+.col-16of20 {
+	flex: 0 0 auto;
+	width: 80%;
 }
 
-.col-14of16 {
-	width: 87.5%;
+.col-17of20 {
+	flex: 0 0 auto;
+	width: 85%;
 }
 
-.col-15of16 {
-	width: 93.75%;
+.col-18of20 {
+	flex: 0 0 auto;
+	width: 90%;
 }
 
-.col-16of16 {
+.col-19of20 {
+	flex: 0 0 auto;
+	width: 95%;
+}
+
+.col-20of20 {
+	flex: 0 0 auto;
 	width: 100%;
+}
+
+@media (max-width: 950px) {
+	.col-4of20 {
+		display: none;
+	}
+}
+
+/* Hide HomeAside on medium screens (<992px) and smaller */
+@media (max-width: 1200px) {
+	.col-5of20 {
+		display: block;
+	}
+	.col-11of20 {
+		width: 80%;
+	}
+}
+
+@media (max-width: 30000px) {
+	.col-5of20 {
+		display: block;
+	}
+}
+
+/* Adjust the layout for very small screens (<=500px) */
+@media (max-width: 900px) {
+	.col-11of20 {
+		width: 100%;
+	}
+	.col-4of20 {
+		display: none;
+	}
 }
 
 .carousel-control-prev-icon,
@@ -390,4 +458,9 @@ body {
 
 .pointer {
 	cursor: pointer;
+}
+
+.dropstart .dropdown-menu[data-bs-popper] {
+	top: 40px;
+	right: -20px;
 }

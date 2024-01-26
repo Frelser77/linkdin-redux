@@ -5,21 +5,21 @@ import HomeAside from "./HomeAside";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  return (
-    <Row className="my-4">
-      <div className="col-3of16 flex-shrink-0">
-        <ProfileCardHome />
-      </div>
-      <div className="col-9of16 flex-shrink-0">
-        <HomeMain />
-      </div>
-      <div className="col-4of16 flex-shrink-0">
-        <HomeAside />
-      </div>
-    </Row>
-  );
+	return (
+		<Row className="my-4">
+			<div className="col-4of20 flex-shrink-0">
+				<ProfileCardHome />
+			</div>
+			<div className="col-11of20 flex-shrink-0 flex-grow-1">
+				<HomeMain />
+			</div>
+			<div className="col-5of20 flex-shrink-0">
+				<HomeAside />
+			</div>
+		</Row>
+	);
 };
 
 export default Home;

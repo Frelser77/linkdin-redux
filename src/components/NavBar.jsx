@@ -145,7 +145,12 @@ function NavBar() {
 									alt="foto profilo"
 									style={{ width: "25px", height: "25px", borderRadius: "50%" }}
 								></img>
-								<NavDropdown title="Tu" id="navbarScrollingDropdown" style={{ fontSize: "0.85rem", marginTop: "-8px" }}>
+								<NavDropdown
+									className="dropstart"
+									title="Tu"
+									id="navbarScrollingDropdown"
+									style={{ fontSize: "0.85rem", marginTop: "-8px" }}
+								>
 									<NavDropdown.Item onClick={(e) => e.stopPropagation()} className="defaultDrop mb-2">
 										<div className="d-flex">
 											<div>
