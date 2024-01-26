@@ -1,132 +1,117 @@
-import { Button, Card, CardBody, CardHeader, Image } from "react-bootstrap";
+import { Button, Card, CardBody, CardHeader, Form, FormControl, Image } from "react-bootstrap";
 import { it } from "date-fns/locale";
 import { formatDistanceToNow } from "date-fns";
 import { FaHeart, FaRegCommentDots, FaShareSquare, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteComment, fetchAllComments, updateComment } from "../redux/slice/fetchCommentsReducer";
-import { useEffect, useState } from "react";
+import { addComment, deleteComment, fetchAllComments, updateComment } from "../redux/slice/fetchCommentsReducer";
+import { useState } from "react";
+import Comment from "./Comment";
 
-const Post = ({ username, text, createdAt, user, postImg, postId }) => {
-	const dispatch = useDispatch();
-	const timeSinceCreated = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: it });
-	let isItMyProfile = false;
-	const myProfile = useSelector((state) => state.fetchMyProfile.data);
-	// const allComments = useSelector((state) => state.comments.comments);
-	// console.log("comments", allComments);
+const Post = ({ username, text, createdAt, user, postImg, allComments, postId, likes, numberOfComments }) => {
+  const dispatch = useDispatch();
+  const timeSinceCreated = formatDistanceToNow(new Date(createdAt), { addSuffix: true, locale: it });
+  let isItMyProfile = false;
+  const myProfile = useSelector((state) => state.fetchMyProfile.data);
 
-	// const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
 
-	// const toggleComments = () => {
-	// 	setShowComments((prevShowComments) => {
-	// 		return !prevShowComments;
-	// 	});
-	// };
-	// useEffect(() => {
-	// 	dispatch(fetchAllComments());
-	// });
+  const toggleComments = () => {
+    let randIndexes = [];
+    for (let i = 0; i < 4; i++) {
+      randIndexes.push(Math.floor(Math.random() * allComments.length + 1));
+    }
 
-	const handleDeleteComment = (commentId) => {
-		// dispatch(deleteComment(commentId));
-	};
+    randIndexes.map((index) => comments.push(allComments[index]));
 
-	const handleUpdateComment = ({ commentId, elementId, rate, comment }) => {
-		// dispatch(updateComment({ commentId, elementId, rate, comment }));
-	};
+    setShowComments(true);
+  };
 
-	// const handleFetchComments = (commentId) => {
-	// 	dispatch(fetchAllComments());
-	// };
+  if (myProfile && user === myProfile._id) {
+    isItMyProfile = true;
+  }
 
-	if (myProfile && user === myProfile._id) {
-		isItMyProfile = true;
-	}
+  return (
+    <Card className="my-1">
+      <CardHeader>
+        <div className="d-flex align-itmes-center">
+          <div className="d-flex justify-content-center align-items-center">
+            <Link to={"/profile/" + user}>
+              <FaUserCircle className="fs-2 me-3" />
+            </Link>
+          </div>
+          <div className="d-flex flex-column">
+            <Link
+              to={isItMyProfile ? `/profile/me` : `/profile/${user}`}
+              className="mb-0"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              {username && username}
+            </Link>
+            <small className="text-muted">{timeSinceCreated}</small>
+          </div>
+        </div>
+      </CardHeader>
+      <CardBody>
+        <p className="mb-2">{text}</p>
+        {postImg && <Image src={postImg} className="w-100 scale" />}
+      </CardBody>
+      <Card.Footer className="d-flex align-items-center">
+        <Button variant="link" className="d-flex align-items-center text-decoration-none ps-0">
+          <FaHeart className="me-1 mb-0" /> {likes}
+        </Button>
+        <Button
+          variant="link"
+          className="d-flex align-items-center text-decoration-none"
+          onClick={() => toggleComments()}
+        >
+          <FaRegCommentDots className="me-1 mb-0" /> {numberOfComments} commenti
+        </Button>
+        <Button variant="link" className="d-flex align-items-center text-decoration-none">
+          <FaShareSquare className="me-1 mb-0" /> Condividi
+        </Button>
+      </Card.Footer>
+      {showComments && comments && (
+        <div className="py-2 border border-1 border-light-secondary border-top-0 border-end-0 border-start-0">
+          {comments.map((comment) => (
+            <Comment key={comment._id} author={comment.author} comment={comment.comment} />
+          ))}
+        </div>
+      )}
+      <Form
+        onSubmit={(event) => {
+          event.preventDefault();
 
-	// const renderComments = () => {
-	// 	if (
-	// 		!allComments ||
-	// 		allComments.length === 0 ||
-	// 		allComments.filter((comment) => comment.elementId === postId).length === 0
-	// 	) {
-	// 		return (
-	// 			<div>
-	// 				<p>Non ci sono commenti. Lascia un commento!</p>
-	// 				{/* Qui puoi inserire il form per aggiungere un commento */}
-	// 				{/*onSubmit={handleNewCommentSubmit}*/}
-	// 				<form>
-	// 					<textarea placeholder="Scrivi un commento..." />
-	// 					<button type="submit">Invia</button>
-	// 				</form>
-	// 			</div>
-	// 		);
-	// 	} else {
-	// 		return allComments
-	// 			.filter((comment) => comment.elementId === postId)
-	// 			.map((comment) => (
-	// 				<div key={comment._id}>
-	// 					<p>{comment.comment}</p>
-	// 					<Button onClick={() => handleDeleteComment(comment._id)}>Elimina</Button>
-	// 					<Button
-	// 						onClick={(event) =>
-	// 							handleUpdateComment({
-	// 								event,
-	// 								commentId: comment._id,
-	// 								elementId: comment.elementId,
-	// 								rate: comment.rate,
-	// 								comment: comment.comment,
-	// 							})
-	// 						}
-	// 					>
-	// 						Modifica
-	// 					</Button>{" "}
-	// 				</div>
-	// 			));
-	// 	}
-	// };
-	// const handleNewCommentSubmit = (event, commentId, elementId, rate, comment) => {
-	// 	event.preventDefault();
-	// 	dispatch(updateComment(commentId));
-	// };
+          const commentToPost = {
+            comment: commentText,
+            rate: 3,
+            elementId: postId,
+          };
 
-	return (
-		<Card className="my-1">
-			<CardHeader>
-				<div className="d-flex align-itmes-center">
-					<div className="d-flex justify-content-center align-items-center">
-						<Link to={"/profile/" + user}>
-							<FaUserCircle className="fs-2 me-3" />
-						</Link>
-					</div>
-					<div className="d-flex flex-column">
-						<Link
-							to={isItMyProfile ? `/profile/me` : `/profile/${user}`}
-							className="mb-0"
-							style={{ textDecoration: "none", color: "black" }}
-						>
-							{username && username}
-						</Link>
-						<small className="text-muted">{timeSinceCreated}</small>
-					</div>
-				</div>
-			</CardHeader>
-			<CardBody>
-				<p className="mb-2">{text}</p>
-				{postImg && <Image src={postImg} className="w-100 scale" />}
-			</CardBody>
-			<Card.Footer className="d-flex align-items-center">
-				<Button variant="link" className="d-flex align-items-center text-decoration-none ps-0">
-					<FaHeart className="me-1 mb-0" /> {Math.floor(Math.random() * 160 + 1)}
-				</Button>
-				<Button variant="link" className="d-flex align-items-center text-decoration-none">
-					{/* onClick={toggleComments()} */}
-					<FaRegCommentDots className="me-1 mb-0" /> {Math.floor(Math.random() * 13 + 1)} commenti
-				</Button>
-				<Button variant="link" className="d-flex align-items-center text-decoration-none">
-					<FaShareSquare className="me-1 mb-0" /> Condividi
-				</Button>
-			</Card.Footer>
-			{/* {showComments && renderComments()} */}
-		</Card>
-	);
+          dispatch(addComment(commentToPost));
+          comments.push({ ...commentToPost, author: myProfile.username });
+          setCommentText("");
+        }}
+      >
+        <div className="d-flex align-items-center px-3 py-2">
+          <div className="me-2">
+            <img
+              src={myProfile && myProfile.image}
+              alt="profile"
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+            />
+          </div>
+          <FormControl
+            value={commentText}
+            className="rounded-pill"
+            placeholder="Scrivi un commento"
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+        </div>
+      </Form>
+    </Card>
+  );
 };
 export default Post;

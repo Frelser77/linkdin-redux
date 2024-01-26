@@ -1,10 +1,34 @@
 import { useSelector } from "react-redux";
-import { Card, CardBody, Col, Row } from "react-bootstrap";
-import { HiUserPlus } from "react-icons/hi2";
+import { Button, Card, CardBody, Col, Row } from "react-bootstrap";
+import { HiCheck, HiUserPlus } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+export const getConnectedProfilesCount = () => {
+	const connectedProfiles = JSON.parse(localStorage.getItem("connectedProfiles")) || [];
+	return connectedProfiles.length;
+};
 
 const AllProfiles = () => {
 	const profiles = useSelector((state) => state.fetchAllProfiles.data);
+	const [connectedProfiles, setConnectedProfiles] = useState(
+		JSON.parse(localStorage.getItem("connectedProfiles")) || []
+	);
+
+	useEffect(() => {
+		setConnectedProfiles(JSON.parse(localStorage.getItem("connectedProfiles")) || []);
+	}, [profiles]);
+
+	const toggleConnection = (profileId) => {
+		let updatedConnectedProfiles;
+		if (connectedProfiles.includes(profileId)) {
+			updatedConnectedProfiles = connectedProfiles.filter((id) => id !== profileId);
+		} else {
+			updatedConnectedProfiles = [...connectedProfiles, profileId];
+		}
+		localStorage.setItem("connectedProfiles", JSON.stringify(updatedConnectedProfiles));
+		setConnectedProfiles(updatedConnectedProfiles);
+	};
 
 	return (
 		<>
@@ -33,13 +57,20 @@ const AllProfiles = () => {
 										</div>
 									</div>
 									<div className="d-flex align-items-center mx-auto">
-										<NavLink
-											to="/messages"
-											className="btn btn-outline-secondary rounded-pill ps-2 pe-3 mt-3 pb-2 py-1 text-center"
+										<Button
+											variant={connectedProfiles.includes(profile._id) ? "outline-primary" : "outline-secondary"}
+											onClick={() => toggleConnection(profile._id)}
+											className={`rounded-pill ps-2 pe-3 mt-3 pb-2 py-1 text-center ${
+												connectedProfiles.includes(profile._id) ? "btn btn-outline-primary" : ""
+											}`}
 										>
-											<HiUserPlus className="mx-1" />
-											Collegati
-										</NavLink>
+											{connectedProfiles.includes(profile._id) ? (
+												<HiCheck className="mx-1" />
+											) : (
+												<HiUserPlus className="mx-1" />
+											)}
+											{connectedProfiles.includes(profile._id) ? "Collegato" : "Collegati"}
+										</Button>
 									</div>
 								</CardBody>
 							</Card>
@@ -49,4 +80,5 @@ const AllProfiles = () => {
 		</>
 	);
 };
+
 export default AllProfiles;

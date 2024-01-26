@@ -5,10 +5,12 @@ import { GoPencil } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { getConnectedProfilesCount } from "../AllProfiles";
 
 const ProfileCardHome = () => {
 	const location = useLocation();
 	const profile = useSelector((state) => state.fetchMyProfile.data);
+	getConnectedProfilesCount();
 
 	return (
 		<>
@@ -57,8 +59,10 @@ const ProfileCardHome = () => {
 						<Row>
 							<Col>
 								<div className="d-flex justify-content-between align-items-baseline">
-									<Link className="undecorated mb-0">Collegamenti</Link>
-									<small className="text-muted">29</small>
+									<Link to={"/connectedProfiles"} className="undecorated mb-0">
+										Collegamenti
+									</Link>
+									<small className="text-muted">{getConnectedProfilesCount()}</small>
 								</div>
 							</Col>
 						</Row>
