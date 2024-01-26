@@ -1,29 +1,52 @@
 import { NavLink } from "react-router-dom";
 import { PiPaperPlaneTiltDuotone } from "react-icons/pi";
+import { Button, Card, CardBody, Col } from "react-bootstrap";
+import { HiCheck, HiUserPlus } from "react-icons/hi2";
 
-const ProfileCard = ({ profile }) => {
+const ProfileCard = ({ profile, isConnected, toggleConnection }) => {
 	return (
-		<div className="d-flex align-items-start mb-2 border border-1 border-secondary border-top-0 border-end-0 border-start-0 pb-3">
-			<NavLink to={`/profile/${profile._id}`}>
-				<img
-					src={profile && profile.image}
-					className="rounded-circle me-2"
-					style={{ width: "48px", height: "48px" }}
-					alt="Profile"
-				/>
-			</NavLink>
-			<div className="ms-1">
-				<NavLink to={`/profile/${profile._id}`} className="undecorated">
-					{profile && profile.name} {"  "}
-					{profile && profile.surname}
-				</NavLink>
-				<div className="text-muted">{profile && profile.title}</div>
-				<NavLink to="/messages" className="btn btn-outline-secondary rounded-pill px-2 py-1 my-1">
-					<PiPaperPlaneTiltDuotone className="mx-1" />
-					Messaggio
-				</NavLink>
-			</div>
-		</div>
+		<Col className="my-1">
+			<Card className="d-flex align-items-start shadow pointer">
+				<CardBody>
+					<NavLink to={`/profile/${profile._id}`}>
+						<img
+							src={profile && profile.image}
+							className="rounded-circle me-2"
+							style={{ width: "48px", height: "48px" }}
+							alt="Profile"
+						/>
+					</NavLink>
+					<div className="ms-1">
+						<NavLink to={`/profile/${profile._id}`} className="undecorated">
+							{profile && profile.name} {"  "}
+							{profile && profile.surname}
+						</NavLink>
+						<div className="text-muted">{profile && profile.title}</div>
+						<NavLink to="/messages" className="btn btn-outline-secondary rounded-pill px-2 py-1 my-1">
+							<PiPaperPlaneTiltDuotone className="mx-1" />
+							Messaggio
+						</NavLink>
+						<Button
+							variant={isConnected ? "outline-primary" : "outline-secondary"}
+							className="rounded-pill px-2 py-1 my-1"
+							onClick={() => toggleConnection(profile._id)}
+						>
+							{isConnected ? (
+								<>
+									<HiCheck className="mx-1" />
+									Già seguito
+								</>
+							) : (
+								<>
+									<HiUserPlus className="mx-1" />
+									Segui
+								</>
+							)}
+						</Button>
+					</div>
+				</CardBody>
+			</Card>
+		</Col>
 	);
 };
 

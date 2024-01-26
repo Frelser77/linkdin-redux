@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, ListGroup, Button, Row, Col } from "react-bootstrap";
+import { Card, ListGroup, Button, Row, Col, ListGroupItem, CardText, CardBody } from "react-bootstrap";
 import { FaHashtag, FaCalendarPlus } from "react-icons/fa";
-import { GoPencil } from "react-icons/go";
+import { GoPencil, GoPlus } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -55,7 +55,7 @@ const ProfileCardHome = () => {
 					</div>
 				</Card.Body>
 				<ListGroup className="list-group-flush">
-					<ListGroup.Item>
+					<ListGroup.Item className="hover">
 						<Row>
 							<Col>
 								<div className="d-flex justify-content-between align-items-baseline">
@@ -74,30 +74,33 @@ const ProfileCardHome = () => {
 							</Col>
 						</Row>
 					</ListGroup.Item>
-					<ListGroup.Item>
+					<ListGroup.Item className="hover">
 						<Link className="undecorated mb-0">Dai una spinta alla tua carriera</Link>
 					</ListGroup.Item>
-					<ListGroup.Item></ListGroup.Item>
+					<ListGroupItem className="hover">
+						<Link className="undecorated">I miei elementi</Link>
+					</ListGroupItem>
 				</ListGroup>
 			</Card>
 
-			<Card className="my-3">
-				<ListGroup className="list-group-flush">
-					<ListGroup.Item>Gruppi</ListGroup.Item>
-					<ListGroup.Item className="d-flex align-items-center">
-						<FaHashtag className="text-muted me-2" />
-						<Link className="undecorated mb-0">Hashtag seguiti</Link>
-					</ListGroup.Item>
-					<ListGroup.Item className="d-flex align-items-center">
-						<FaCalendarPlus className="text-muted me-2" />
-						<Link className="undecorated mb-0">Eventi</Link>
-					</ListGroup.Item>
+			<Card className="my-3 rounded">
+				<CardBody className="list-group-flush">
+					<CardText className="text-primary">Gruppi</CardText>
+					<CardText className="d-flex align-items-center d-flex align-itmes-baseline justify-content-between">
+						<Link className="undecorated mb-0 text-primary">Hashtag seguiti</Link>
+						<GoPlus />
+					</CardText>
+					<CardText className="d-flex align-items-center ">
+						<Link className="undecorated mb-0 text-primary">Eventi</Link>
+					</CardText>
+				</CardBody>
+				<ListGroup className="border-top-0">
+					<ListGroupItem className="rounded-0 rounded-bottom border-0 border-top border-bottom-0 border-right-0 border-left-0">
+						<Link className="undecorated mb-0">
+							<small className="fw-semibold">Scopri di più</small>
+						</Link>
+					</ListGroupItem>
 				</ListGroup>
-				<Card.Footer>
-					<Link className="undecorated mb-0">
-						<small>Scopri di più</small>
-					</Link>
-				</Card.Footer>
 			</Card>
 		</>
 	);
