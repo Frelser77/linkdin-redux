@@ -223,7 +223,7 @@ function NavBar() {
 								scroll={true}
 								backdrop={false}
 								placement="end"
-								style={{ top: "68px", height: "calc(100% - 68px)", position: "fixed" }}
+								style={{ top: "68px", height: "calc(100% - 68px)", position: "fixed", borderRadiusTop: "25%" }}
 							>
 								<Offcanvas.Header closeButton>
 									<Offcanvas.Title>Per le aziende</Offcanvas.Title>

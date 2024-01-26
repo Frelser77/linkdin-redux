@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import ProfileCardHome from "./ProfileCardHome";
 import HomeMain from "./HomeMain";
 import HomeAside from "./HomeAside";
