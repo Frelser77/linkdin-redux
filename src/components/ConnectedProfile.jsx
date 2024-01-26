@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import ProfileCard from "./ProfileCard";
 import { useSelector } from "react-redux";
@@ -7,17 +7,26 @@ import { Link } from "react-router-dom";
 
 const ConnectedProfile = () => {
 	const profiles = useSelector((state) => state.fetchAllProfiles.data);
-	const connectedProfileIds = JSON.parse(localStorage.getItem("connectedProfiles")) || [];
-	const connectedProfiles = profiles && profiles.filter((profile) => connectedProfileIds.includes(profile._id));
+	const [connectedProfileIds, setConnectedProfileIds] = useState(
+		JSON.parse(localStorage.getItem("connectedProfiles")) || []
+	);
+
+	useEffect(() => {
+		setConnectedProfileIds(JSON.parse(localStorage.getItem("connectedProfiles")) || []);
+	}, [profiles]);
 
 	const toggleConnection = (profileId) => {
-		const updatedConnectedProfiles = connectedProfileIds.includes(profileId)
-			? connectedProfileIds.filter((id) => id !== profileId)
-			: [...connectedProfileIds, profileId];
-
+		let updatedConnectedProfiles;
+		if (connectedProfileIds.includes(profileId)) {
+			updatedConnectedProfiles = connectedProfileIds.filter((id) => id !== profileId);
+		} else {
+			updatedConnectedProfiles = [...connectedProfileIds, profileId];
+		}
 		localStorage.setItem("connectedProfiles", JSON.stringify(updatedConnectedProfiles));
+		setConnectedProfileIds(updatedConnectedProfiles);
 	};
 
+	const connectedProfiles = profiles?.filter((profile) => connectedProfileIds.includes(profile._id));
 	return (
 		<Container>
 			<Row className="my-4">

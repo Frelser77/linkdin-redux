@@ -22,7 +22,7 @@ const ProfileCard = ({ profile, isConnected, toggleConnection }) => {
 							{profile && profile.surname}
 						</NavLink>
 						<div className="text-muted">{profile && profile.title}</div>
-						<NavLink to="/messages" className="btn btn-outline-secondary rounded-pill px-2 py-1 my-1">
+						<NavLink to="/messages" className="btn btn-outline-secondary rounded-pill px-2 py-1 my-1 me-2">
 							<PiPaperPlaneTiltDuotone className="mx-1" />
 							Messaggio
 						</NavLink>
