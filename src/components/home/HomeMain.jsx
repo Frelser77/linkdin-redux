@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { BsPaperclip } from "react-icons/bs";
 import { uploadFile } from "../../redux/slice/fileUploadReducer";
 import { Link } from "react-router-dom";
+import { deleteComment, fetchAllComments, updateComment } from "../../redux/slice/fetchCommentsReducer";
+
 const HomeMain = () => {
 	const profile = useSelector((state) => state.fetchMyProfile.data);
 	let postList = useSelector((state) => state.fetchPost.postList);
@@ -16,6 +18,14 @@ const HomeMain = () => {
 	const dispatch = useDispatch();
 	const fileInputRef = useRef(null);
 	const [image, setImage] = useState(null);
+	// const allComments = useSelector((state) => state.comments.comments);
+	// console.log("comments", allComments);
+
+	// COMMENTI
+
+	// const handleFetchComments = (commentId) => {
+	// 	dispatch(fetchAllComments());
+	// };
 
 	const handleImageChange = (e) => {
 		if (e.target.files && e.target.files[0]) {
@@ -122,6 +132,7 @@ const HomeMain = () => {
 								createdAt={post.createdAt}
 								user={post.user._id}
 								postImg={post.image && post.image}
+								// allcomments={allComments}
 							/>
 						</Col>
 					))}

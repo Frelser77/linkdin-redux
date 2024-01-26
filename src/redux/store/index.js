@@ -7,6 +7,7 @@ import fileUploadReducer from "../slice/fileUploadReducer";
 import fetchPostReducer from "../slice/fetchPostReducer";
 import fetchMyProfileReducer from "../slice/fetchMyProfileReducer";
 import fetchJobsReducers from "../slice/fetchJobsReducers";
+import commentsReducer from "../slice/fetchCommentsReducer";
 
 const rootReducer = combineReducers({
 	fetchProfile: fetchProfileReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	fetchMyProfile: fetchMyProfileReducer,
 	fetchPost: fetchPostReducer,
 	jobs: fetchJobsReducers,
+	comments: commentsReducer,
 });
 
 export const store = configureStore({
