@@ -30,7 +30,7 @@ const HomeAside = () => {
 						{visibleNews.map((post, index) => (
 							<ListGroupItem
 								key={post._id || index}
-								className="border border-1 border-light-secondary border-start-0 border-end-0 border-bottom-0 hover my-1"
+								className="border border-1 border-light-secondary border-start-0 border-end-0 border-bottom-0 hover"
 								style={{ maxHeight: "76px", overflowY: "hidden", maxWidth: "245px", overflowX: "auto" }}
 							>
 								<p className="mb-0">{post.user.username && post.user.username}</p>
