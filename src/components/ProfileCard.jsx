@@ -6,7 +6,7 @@ import { HiCheck, HiUserPlus } from "react-icons/hi2";
 const ProfileCard = ({ profile, isConnected, toggleConnection }) => {
 	return (
 		<Col className="my-1">
-			<Card className="d-flex align-items-start shadow pointer">
+			<Card className="d-flex align-items-start pointer">
 				<CardBody>
 					<NavLink to={`/profile/${profile._id}`}>
 						<img
