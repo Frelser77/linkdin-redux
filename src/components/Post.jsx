@@ -19,14 +19,9 @@ const Post = ({ username, text, createdAt, user, postImg, allComments, postId, l
   const [commentText, setCommentText] = useState("");
 
   const toggleComments = () => {
-    let randIndexes = [];
-    for (let i = 0; i < 4; i++) {
-      randIndexes.push(Math.floor(Math.random() * allComments.length + 1));
-    }
+    allComments && setComments(allComments.filter((comment) => comment.elementId === postId));
 
-    randIndexes.map((index) => comments.push(allComments[index]));
-
-    setShowComments(true);
+    setShowComments(!showComments);
   };
 
   if (myProfile && user === myProfile._id) {
@@ -67,13 +62,13 @@ const Post = ({ username, text, createdAt, user, postImg, allComments, postId, l
           className="d-flex align-items-center text-decoration-none"
           onClick={() => toggleComments()}
         >
-          <FaRegCommentDots className="me-1 mb-0" /> {numberOfComments} commenti
+          <FaRegCommentDots className="me-1 mb-0" /> {comments.length} commenti
         </Button>
         <Button variant="link" className="d-flex align-items-center text-decoration-none">
           <FaShareSquare className="me-1 mb-0" /> Condividi
         </Button>
       </Card.Footer>
-      {showComments && comments && (
+      {showComments && allComments && comments.length > 0 && (
         <div className="py-2 border border-1 border-light-secondary border-top-0 border-end-0 border-start-0">
           {comments.map((comment) => (
             <Comment key={comment._id} author={comment.author} comment={comment.comment} />
