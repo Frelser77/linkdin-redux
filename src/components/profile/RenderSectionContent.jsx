@@ -10,6 +10,7 @@ import { FaHeart, FaRegCommentDots, FaShareSquare } from "react-icons/fa";
 import Post from "../Post";
 import { fetchAllComments } from "../../redux/slice/fetchCommentsReducer";
 import { fetchMyProfile } from "../../redux/slice/fetchMyProfileReducer";
+import { fetchExperienceDetails } from "../../redux/slice/ExperienceSlice";
 
 const RenderSectionContent = ({ myPosts, activeSection }) => {
 	const location = useLocation();
@@ -18,10 +19,8 @@ const RenderSectionContent = ({ myPosts, activeSection }) => {
 	const errorUpload = useSelector((state) => state.fileUpload.error);
 	const loading = useSelector((state) => state.fileUpload.loading);
 	const myProfile = useSelector((state) => state.fetchMyProfile.data);
-	console.log(myProfile);
 	const allComments = useSelector((state) => state.comments.comments);
 	const myComments = allComments.filter((comment) => comment.author._id === myProfile._id);
-	console.log("mio", myComments);
 	const [showDeletePostModal, setShowDeletePostModal] = useState(false);
 	const [showEditPostModal, setShowEditPostModal] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);

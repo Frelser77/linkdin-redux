@@ -54,6 +54,7 @@ body {
 	background-color: rgba(247, 247, 247, 1);
 	transition: transform 0.5s ease-in-out;
 	border-top: 1px solid gray;
+	z-index: 1019;
 }
 
 .bannerTop {
@@ -154,6 +155,32 @@ body {
 #mini-footer small {
 	font-size: 12px;
 }
+
+p.no-margin {
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+.prev-page:hover {
+	background-color: rgba(193, 193, 193, 0.712);
+}
+
+.fs-7 {
+	font-size: 0.8rem;
+}
+
+.fs-8 {
+	font-size: 0.75rem;
+}
+
+.fs-9 {
+	font-size: 0.7rem;
+}
+
+.fs-10 {
+	font-size: 0.65rem;
+}
+
 .col-1of20 {
 	flex: 0 0 auto;
 	width: 5%;
@@ -408,13 +435,13 @@ body {
 	z-index: 1000;
 }
 .defaultDrop {
-	pointer-events: none; /* Disable pointer events, making the item not clickable */
-	cursor: default; /* Set cursor to default to indicate non-clickable */
-	background-color: inherit !important; /* Prevent background color change */
-	color: inherit !important; /* Prevent text color change */
+	pointer-events: none;
+	cursor: default;
+	background-color: inherit !important;
+	color: inherit !important;
 }
 .defaultDrop:hover {
-	background-color: inherit !important; /* Prevent background color change on hover */
+	background-color: inherit !important;
 }
 
 .form-control:focus {

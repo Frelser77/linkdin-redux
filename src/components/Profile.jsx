@@ -35,6 +35,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import RenderSectionContent from "./profile/RenderSectionContent";
 import { fetchAllComments } from "../redux/slice/fetchCommentsReducer";
 import CreatePostModal from "./modal/CreatePostModal";
+import SideProfilesCard from "./profile/SideProfileCard";
 export const logoUrl =
 	"https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 
@@ -57,14 +58,14 @@ function Profile() {
 	const [activeSection, setActiveSection] = useState("post");
 	const navigate = useNavigate();
 	const experiences = useSelector((state) => state.fetchExperiences.items);
+	console.log(experiences);
 	const [showModal, setShowModal] = useState(false);
 
 	const handleShowModal = () => setShowModal(true);
 	const handleCloseModal = () => setShowModal(false);
-
 	const handleShowExpDetails = () => {
 		const userId = profile._id;
-		navigate(`/profile/${userId}/experiences`);
+		navigate(`/profile/${userId}/details/experiences`);
 	};
 
 	const handleClose = () => setShow(false);
@@ -431,7 +432,12 @@ function Profile() {
 							</Button>
 						</div>
 						{}
-						<RenderSectionContent myPosts={myPosts} myProfile={myProfile} activeSection={activeSection} />
+						<RenderSectionContent
+							myPosts={myPosts}
+							myProfile={myProfile}
+							activeSection={activeSection}
+							experiences={experiences}
+						/>
 					</Card>
 					<Card className="mb-2 shadow">
 						<Card.Title className="fs-4 d-flex justify-content-between align-items-center p-2 mx-2 my-1">
@@ -517,7 +523,7 @@ function Profile() {
 						</Card.Body>
 					</Card>
 					<BannerCard />
-					<Card className="shadow">
+					{/* <Card className="shadow">
 						<Card.Body>
 							<Card.Title>Altri profili consultati</Card.Title>
 							{allProfiles &&
@@ -526,6 +532,9 @@ function Profile() {
 								)}
 						</Card.Body>
 					</Card>
+				</Col> */}
+					{/* <Col md={3} className="d-none d-md-block "> */}
+					<SideProfilesCard profiles={allProfiles} />
 				</Col>
 			</Row>
 			{/* MODALE */}
