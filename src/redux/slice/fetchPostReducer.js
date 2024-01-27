@@ -154,7 +154,8 @@ const fetchPostSlice = createSlice({
 			})
 			.addCase(deletePost.fulfilled, (state, action) => {
 				state.status = "succeeded";
-				state.postList = state.postList.filter((post) => post._id !== action.payload); // Rimuove l'esperienza dall'elenco
+				state.myPosts = state.myPosts.filter((post) => post._id !== action.payload);
+				state.postList = state.postList.filter((post) => post._id !== action.payload);
 			})
 			.addCase(deletePost.rejected, (state, action) => {
 				state.status = "failed";
