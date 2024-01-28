@@ -20,7 +20,7 @@ const RenderSectionContent = ({ myPosts, activeSection }) => {
 	const loading = useSelector((state) => state.fileUpload.loading);
 	const myProfile = useSelector((state) => state.fetchMyProfile.data);
 	const allComments = useSelector((state) => state.comments.comments);
-	const myComments = allComments.filter((comment) => comment.author._id === myProfile._id);
+	const myComments = myProfile && allComments && allComments.filter((comment) => comment.author._id === myProfile._id);
 	const [showDeletePostModal, setShowDeletePostModal] = useState(false);
 	const [showEditPostModal, setShowEditPostModal] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);

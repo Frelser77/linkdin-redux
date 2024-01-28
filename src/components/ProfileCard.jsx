@@ -8,20 +8,24 @@ const ProfileCard = ({ profile, isConnected, toggleConnection, currentUserId }) 
 		<Col className="my-1">
 			<Card className="d-flex align-items-start pointer">
 				<CardBody>
-					<NavLink to={`/profile/${profile._id}`}>
-						<img
-							src={profile && profile.image}
-							className="rounded-circle me-2"
-							style={{ width: "48px", height: "48px" }}
-							alt="Profile"
-						/>
-					</NavLink>
-					<div className="ms-1">
-						<NavLink to={`/profile/${profile._id}`} className="undecorated">
-							{profile && profile.name} {"  "}
-							{profile && profile.surname}
+					<div className="d-flex">
+						<NavLink to={`/profile/${profile._id}`}>
+							<img
+								src={profile && profile.image}
+								className="rounded-circle me-2"
+								style={{ width: "48px", height: "48px" }}
+								alt="Profile"
+							/>
 						</NavLink>
-						<div className="text-muted">{profile && profile.title}</div>
+						<div>
+							<NavLink to={`/profile/${profile._id}`} className="undecorated">
+								{profile && profile.name} {"  "}
+								{profile && profile.surname}
+							</NavLink>
+							<p className="text-muted mb-0">{profile && profile.title}</p>
+						</div>
+					</div>
+					<div className="ms-1">
 						{profile._id !== currentUserId && (
 							<>
 								<NavLink to="/messages" className="btn btn-outline-secondary rounded-pill px-2 py-1 my-1 me-2">

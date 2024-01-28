@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, FormControl, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, selectMyProfileData } from "../../redux/slice/fetchPostReducer";
+import { addPost, fetchAllPosts, selectMyProfileData } from "../../redux/slice/fetchPostReducer";
 import { uploadFile } from "../../redux/slice/fileUploadReducer";
 import ProfileCard from "../ProfileCard";
 
