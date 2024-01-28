@@ -182,7 +182,6 @@ const experiencesSlice = createSlice({
 					state.items[index] = { ...state.items[index], ...action.payload };
 				}
 			})
-
 			.addCase(editExperience.rejected, (state, action) => {
 				state.status = "failed";
 				state.error = action.error.message;

@@ -40,26 +40,25 @@ export const logoUrl =
 	"https://media.licdn.com/dms/image/C4E0BAQHYgix-Ynux1A/company-logo_100_100/0/1646830188798/epicodeschool_logo?e=1714003200&v=beta&t=02cZOkAFfrcsqE3vMctwQcElNrMnInX4NwQFmaTF1M8";
 
 function Profile() {
+	const dispatch = useDispatch();
+	const params = useParams();
+	const location = useLocation();
+	const navigate = useNavigate();
+	const statusPut = useSelector((state) => state.editProfile.status);
 	const profile = useSelector((state) => state.fetchProfile.data);
 	const myProfile = useSelector((state) => state.fetchMyProfile.data);
 	const myPosts = useSelector((state) => state.fetchPost.myPosts);
 	const allPosts = useSelector((state) => state.fetchPost.postList);
-	const dispatch = useDispatch();
-	const params = useParams();
-	const location = useLocation();
+	const experiences = useSelector((state) => state.fetchExperiences.items);
 	const allProfiles = useSelector((state) => state.fetchAllProfiles.data);
+	const [showAlert, setShowAlert] = useState(false);
+	const [dataToEdit, setDataToEdit] = useState({ ...profile });
+	const [activeSection, setActiveSection] = useState("post");
+	const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState(false);
 	const [showSecond, setShowSecond] = useState(false);
 	const [showExp, setShowExp] = useState(false);
 	const [showUpload, setShowUpload] = useState(false);
-	const statusPut = useSelector((state) => state.editProfile.status);
-	const [showAlert, setShowAlert] = useState(false);
-	const [dataToEdit, setDataToEdit] = useState({ ...profile });
-	const [activeSection, setActiveSection] = useState("post");
-	const navigate = useNavigate();
-	const experiences = useSelector((state) => state.fetchExperiences.items);
-	console.log(experiences);
-	const [showModal, setShowModal] = useState(false);
 
 	const handleShowModal = () => setShowModal(true);
 	const handleCloseModal = () => setShowModal(false);
